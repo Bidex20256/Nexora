@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tasks · NEXORA</title>
   <meta name="description" content="Track, filter and update every task in your NEXORA workspace.">
-  <meta name="theme-color" content="#060913">
+  <meta name="theme-color" content="#faf8f3">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/styles.css">
   <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
 </head>
@@ -24,22 +24,24 @@
 
       <main class="page" id="main" tabindex="-1">
         <div class="page-header">
-          <div>
-            <p class="eyebrow">Workspace</p>
+          <div class="page-heading">
+            <p class="eyebrow"><span class="eyebrow-index">03</span>Workspace</p>
             <h1 class="page-title">Tasks</h1>
-            <p class="page-sub">Plan, prioritize and track work across every project.</p>
           </div>
-          <div class="page-actions">
-            <button type="button" class="btn btn-secondary" data-action="clear-completed"><span data-icon="trash" data-icon-class="icon-sm"></span>Clear completed</button>
-            <button type="button" class="btn btn-primary" data-open-modal="task-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>New task</button>
+          <div class="page-intro">
+            <p class="page-sub">Plan, prioritize and track work across every project. Tick a task to complete it, or change its status inline.</p>
+            <div class="page-actions">
+              <button type="button" class="btn btn-secondary" data-action="clear-completed"><span data-icon="trash" data-icon-class="icon-sm"></span>Clear completed</button>
+              <button type="button" class="btn btn-primary" data-open-modal="task-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>New task</button>
+            </div>
           </div>
         </div>
 
-        <section class="task-summary" aria-label="Task summary">
-          <div class="card mini-stat"><span class="icon-tile" data-tone="neutral"><span data-icon="layers"></span></span><div><strong data-task-count="todo">0</strong><span>To do</span></div></div>
-          <div class="card mini-stat"><span class="icon-tile" data-tone="info"><span data-icon="activity"></span></span><div><strong data-task-count="in-progress">0</strong><span>In progress</span></div></div>
-          <div class="card mini-stat"><span class="icon-tile" data-tone="warning"><span data-icon="eye"></span></span><div><strong data-task-count="review">0</strong><span>In review</span></div></div>
-          <div class="card mini-stat"><span class="icon-tile" data-tone="success"><span data-icon="check-circle"></span></span><div><strong data-task-count="done">0</strong><span>Done</span></div></div>
+        <section class="stat-strip compact" aria-label="Task summary">
+          <div class="stat"><p class="stat-label"><span class="stat-index">01</span>To do</p><p class="stat-value" data-task-count="todo">0</p></div>
+          <div class="stat"><p class="stat-label"><span class="stat-index">02</span>In progress</p><p class="stat-value" data-task-count="in-progress">0</p></div>
+          <div class="stat"><p class="stat-label"><span class="stat-index">03</span>In review</p><p class="stat-value" data-task-count="review">0</p></div>
+          <div class="stat"><p class="stat-label"><span class="stat-index">04</span>Done</p><p class="stat-value" data-task-count="done">0</p></div>
         </section>
 
         <div class="toolbar">
@@ -79,14 +81,14 @@
           <button type="button" class="chip" aria-pressed="false" data-filter="done">Done <span class="count" data-count="done">0</span></button>
         </div>
 
-        <section class="card card-flush" aria-label="Task list">
+        <section class="data-list" aria-label="Task list">
           <div class="task-head" aria-hidden="true">
             <span></span>
             <span>Task</span>
             <span>Status</span>
             <span>Priority</span>
             <span class="col-assignee">Assignee</span>
-            <span class="col-due">Due date</span>
+            <span class="col-due">Due</span>
             <span></span>
           </div>
           <ul class="task-list" id="task-list">
@@ -97,7 +99,7 @@
           </ul>
           <div class="list-foot">
             <span id="task-result-count" aria-live="polite">0 tasks</span>
-            <span class="subtle">Changes are saved in this browser.</span>
+            <span>Changes are saved in this browser</span>
           </div>
         </section>
       </main>

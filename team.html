@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Team · NEXORA</title>
-  <meta name="description" content="See who is on your NEXORA team, their roles, status, active projects and completed tasks.">
-  <meta name="theme-color" content="#060913">
+  <meta name="description" content="The NEXORA team directory: roles, status, active projects and completed tasks.">
+  <meta name="theme-color" content="#faf8f3">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/styles.css">
   <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
 </head>
@@ -24,21 +24,23 @@
 
       <main class="page" id="main" tabindex="-1">
         <div class="page-header">
-          <div>
-            <p class="eyebrow">Workspace</p>
+          <div class="page-heading">
+            <p class="eyebrow"><span class="eyebrow-index">04</span>Directory</p>
             <h1 class="page-title">Team</h1>
-            <p class="page-sub">Manage members, roles and workload across your organization.</p>
           </div>
-          <div class="page-actions">
-            <button type="button" class="btn btn-primary" data-open-modal="member-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>Invite member</button>
+          <div class="page-intro">
+            <p class="page-sub">Manage members, roles and workload across your organization.</p>
+            <div class="page-actions">
+              <button type="button" class="btn btn-primary" data-open-modal="member-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>Invite member</button>
+            </div>
           </div>
         </div>
 
-        <section class="task-summary" aria-label="Team summary">
-          <div class="card mini-stat"><span class="icon-tile" data-tone="accent"><span data-icon="users"></span></span><div><strong data-team-stat="total">0</strong><span>Members</span></div></div>
-          <div class="card mini-stat"><span class="icon-tile" data-tone="success"><span data-icon="activity"></span></span><div><strong data-team-stat="online">0</strong><span>Online now</span></div></div>
-          <div class="card mini-stat"><span class="icon-tile" data-tone="violet"><span data-icon="check-circle"></span></span><div><strong data-team-stat="avg">0</strong><span>Avg. tasks completed</span></div></div>
-          <div class="card mini-stat"><span class="icon-tile" data-tone="info"><span data-icon="layers"></span></span><div><strong data-team-stat="departments">0</strong><span>Departments</span></div></div>
+        <section class="stat-strip compact" aria-label="Team summary">
+          <div class="stat"><p class="stat-label"><span class="stat-index">01</span>Members</p><p class="stat-value" data-team-stat="total">0</p></div>
+          <div class="stat"><p class="stat-label"><span class="stat-index">02</span>Online now</p><p class="stat-value" data-team-stat="online">0</p></div>
+          <div class="stat"><p class="stat-label"><span class="stat-index">03</span>Avg. tasks done</p><p class="stat-value" data-team-stat="avg">0</p></div>
+          <div class="stat"><p class="stat-label"><span class="stat-index">04</span>Departments</p><p class="stat-value" data-team-stat="departments">0</p></div>
         </section>
 
         <div class="toolbar">
@@ -63,8 +65,8 @@
               <option value="invited">Invited</option>
             </select>
             <div class="segmented" role="group" aria-label="Layout" id="member-view">
-              <button type="button" aria-pressed="true" data-view="cards"><span data-icon="grid" data-icon-class="icon-sm"></span>Cards</button>
-              <button type="button" aria-pressed="false" data-view="table"><span data-icon="list" data-icon-class="icon-sm"></span>Table</button>
+              <button type="button" aria-pressed="true" data-view="table"><span data-icon="list" data-icon-class="icon-sm"></span>Directory</button>
+              <button type="button" aria-pressed="false" data-view="cards"><span data-icon="grid" data-icon-class="icon-sm"></span>Grid</button>
             </div>
           </div>
         </div>

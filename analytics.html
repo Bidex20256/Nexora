@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Analytics · NEXORA</title>
   <meta name="description" content="Productivity analytics for your NEXORA workspace: throughput, project completion and team performance.">
-  <meta name="theme-color" content="#060913">
+  <meta name="theme-color" content="#faf8f3">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/styles.css">
   <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
 </head>
@@ -24,92 +24,94 @@
 
       <main class="page" id="main" tabindex="-1">
         <div class="page-header">
-          <div>
-            <p class="eyebrow">Insights</p>
+          <div class="page-heading">
+            <p class="eyebrow"><span class="eyebrow-index">05</span>Insights</p>
             <h1 class="page-title">Analytics</h1>
-            <p class="page-sub">Understand throughput, delivery and team performance over time.</p>
           </div>
-          <div class="page-actions">
-            <div class="segmented" role="group" aria-label="Reporting period" id="analytics-range">
-              <button type="button" aria-pressed="false" data-range="7d">7 days</button>
-              <button type="button" aria-pressed="true" data-range="30d">30 days</button>
-              <button type="button" aria-pressed="false" data-range="90d">90 days</button>
+          <div class="page-intro">
+            <p class="page-sub">Throughput, delivery and team performance over time. Switch the reporting period to update every figure.</p>
+            <div class="page-actions">
+              <div class="segmented" role="group" aria-label="Reporting period" id="analytics-range">
+                <button type="button" aria-pressed="false" data-range="7d">7 days</button>
+                <button type="button" aria-pressed="true" data-range="30d">30 days</button>
+                <button type="button" aria-pressed="false" data-range="90d">90 days</button>
+              </div>
+              <button type="button" class="btn btn-secondary" data-action="export-report"><span data-icon="download" data-icon-class="icon-sm"></span>Export</button>
             </div>
-            <button type="button" class="btn btn-secondary" data-action="export-report"><span data-icon="download" data-icon-class="icon-sm"></span>Export</button>
           </div>
         </div>
 
-        <section class="kpi-grid" aria-label="Key metrics">
-          <article class="card stat">
-            <div class="stat-top"><h2 class="stat-label">Tasks completed</h2><span class="icon-tile" data-tone="success"><span data-icon="check-circle"></span></span></div>
+        <section class="stat-strip" aria-label="Key metrics">
+          <article class="stat">
+            <h2 class="stat-label"><span class="stat-index">A</span>Tasks completed</h2>
             <p class="stat-value" data-kpi="completed">0</p>
             <p class="stat-foot"><span class="trend up" data-kpi-trend="completed">+0%</span>vs previous period</p>
           </article>
-          <article class="card stat">
-            <div class="stat-top"><h2 class="stat-label">Avg. project progress</h2><span class="icon-tile" data-tone="accent"><span data-icon="target"></span></span></div>
+          <article class="stat">
+            <h2 class="stat-label"><span class="stat-index">B</span>Avg. project progress</h2>
             <p class="stat-value" data-kpi="completion">0%</p>
-            <p class="stat-foot">Average progress across all projects</p>
+            <p class="stat-foot">Across all projects</p>
           </article>
-          <article class="card stat">
-            <div class="stat-top"><h2 class="stat-label">Team productivity</h2><span class="icon-tile" data-tone="violet"><span data-icon="zap"></span></span></div>
+          <article class="stat">
+            <h2 class="stat-label"><span class="stat-index">C</span>Team productivity</h2>
             <p class="stat-value" data-kpi="productivity">0%</p>
             <p class="stat-foot">Tasks completed vs. created</p>
           </article>
-          <article class="card stat">
-            <div class="stat-top"><h2 class="stat-label">Avg. cycle time</h2><span class="icon-tile" data-tone="warning"><span data-icon="clock"></span></span></div>
+          <article class="stat">
+            <h2 class="stat-label"><span class="stat-index">D</span>Avg. cycle time</h2>
             <p class="stat-value" data-kpi="cycle">0d</p>
             <p class="stat-foot"><span class="trend up" data-kpi-trend="cycle">0%</span>faster than before</p>
           </article>
         </section>
 
-        <div class="analytics-main">
-          <section class="card" aria-labelledby="trend-title">
-            <div class="card-head">
+        <div class="layout-split">
+          <section class="panel" aria-labelledby="trend-title">
+            <div class="panel-head">
               <div>
-                <h2 class="card-title" id="trend-title">Tasks completed</h2>
-                <p class="card-sub" data-range-label>Last 30 days</p>
+                <p class="panel-label" data-range-label>Last 30 days</p>
+                <h2 class="panel-title" id="trend-title">Tasks completed</h2>
               </div>
               <div class="legend" aria-hidden="true">
-                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent)"></span>Completed</span>
-                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent-2)"></span>Created</span>
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--chart-1)"></span>Completed</span>
+                <span class="legend-item"><span class="legend-dot dashed" style="--c: var(--chart-2)"></span>Created</span>
               </div>
             </div>
             <div class="chart" id="trend-chart" style="--chart-h: 280px"><div class="skeleton sk-chart"></div></div>
           </section>
 
-          <section class="card" aria-labelledby="completion-title">
-            <div class="card-head">
+          <section class="panel" aria-labelledby="completion-title">
+            <div class="panel-head">
               <div>
-                <h2 class="card-title" id="completion-title">Project completion</h2>
-                <p class="card-sub">Share of projects finished, by status</p>
+                <p class="panel-label">Portfolio</p>
+                <h2 class="panel-title" id="completion-title">Project completion</h2>
               </div>
             </div>
-            <div class="donut-wrap" id="completion-donut"></div>
+            <div id="completion-donut"></div>
           </section>
         </div>
 
-        <div class="grid-2">
-          <section class="card" aria-labelledby="weekly-title">
-            <div class="card-head">
+        <div class="layout-even">
+          <section class="panel" aria-labelledby="weekly-title">
+            <div class="panel-head">
               <div>
-                <h2 class="card-title" id="weekly-title">Weekly activity</h2>
-                <p class="card-sub">Tasks created and completed this week</p>
+                <p class="panel-label">This week</p>
+                <h2 class="panel-title" id="weekly-title">Weekly activity</h2>
               </div>
               <div class="legend" aria-hidden="true">
-                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent)"></span>Completed</span>
-                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent-2)"></span>Created</span>
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--chart-1)"></span>Completed</span>
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--chart-2)"></span>Created</span>
               </div>
             </div>
             <div class="chart" id="weekly-chart" style="--chart-h: 240px"><div class="skeleton sk-chart"></div></div>
           </section>
 
-          <section class="card" aria-labelledby="team-productivity-title">
-            <div class="card-head">
+          <section class="panel" aria-labelledby="team-productivity-title">
+            <div class="panel-head">
               <div>
-                <h2 class="card-title" id="team-productivity-title">Team productivity</h2>
-                <p class="card-sub">Tasks completed per member</p>
+                <p class="panel-label">Tasks completed per member</p>
+                <h2 class="panel-title" id="team-productivity-title">Team productivity</h2>
               </div>
-              <a class="card-link" href="team.html">View team <span data-icon="chevron-right" data-icon-class="icon-sm"></span></a>
+              <a class="panel-link" href="team.html">View team <span data-icon="arrow-right" data-icon-class="icon-xs"></span></a>
             </div>
             <ul class="hbar-list" id="team-bars">
               <li class="sk-row"><span class="skeleton sk-circle"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span></span></li>
@@ -119,22 +121,22 @@
           </section>
         </div>
 
-        <div class="grid-2">
-          <section class="card" aria-labelledby="monthly-title">
-            <div class="card-head">
+        <div class="layout-even">
+          <section class="panel" aria-labelledby="monthly-title">
+            <div class="panel-head">
               <div>
-                <h2 class="card-title" id="monthly-title">Monthly activity</h2>
-                <p class="card-sub">Tasks completed over the last 12 months</p>
+                <p class="panel-label">Last 12 months</p>
+                <h2 class="panel-title" id="monthly-title">Monthly activity</h2>
               </div>
             </div>
             <div class="chart" id="monthly-chart" style="--chart-h: 240px"><div class="skeleton sk-chart"></div></div>
           </section>
 
-          <section class="card" aria-labelledby="heatmap-title">
-            <div class="card-head">
+          <section class="panel" aria-labelledby="heatmap-title">
+            <div class="panel-head">
               <div>
-                <h2 class="card-title" id="heatmap-title">Activity heatmap</h2>
-                <p class="card-sub">Daily updates over the last 20 weeks</p>
+                <p class="panel-label">Last 20 weeks</p>
+                <h2 class="panel-title" id="heatmap-title">Activity heatmap</h2>
               </div>
             </div>
             <div class="heatmap-wrap">
@@ -152,13 +154,13 @@
           </section>
         </div>
 
-        <section class="card card-flush" aria-labelledby="progress-title">
-          <div class="card-head">
+        <section class="panel" aria-labelledby="progress-title">
+          <div class="panel-head">
             <div>
-              <h2 class="card-title" id="progress-title">Project breakdown</h2>
-              <p class="card-sub">Status, task completion and progress by project</p>
+              <p class="panel-label">By project</p>
+              <h2 class="panel-title" id="progress-title">Project breakdown</h2>
             </div>
-            <a class="card-link" href="projects.html">All projects <span data-icon="chevron-right" data-icon-class="icon-sm"></span></a>
+            <a class="panel-link" href="projects.html">All projects <span data-icon="arrow-right" data-icon-class="icon-xs"></span></a>
           </div>
           <div class="table-wrap" id="project-progress">
             <div class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span><span class="skeleton sk-line w-40"></span></span></div>

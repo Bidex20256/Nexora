@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Settings · NEXORA</title>
   <meta name="description" content="Manage your NEXORA profile, notifications, appearance and security.">
-  <meta name="theme-color" content="#060913">
+  <meta name="theme-color" content="#faf8f3">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/styles.css">
   <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
 </head>
@@ -24,167 +24,165 @@
 
       <main class="page" id="main" tabindex="-1">
         <div class="page-header">
-          <div>
-            <p class="eyebrow">Account</p>
+          <div class="page-heading">
+            <p class="eyebrow"><span class="eyebrow-index">06</span>Account</p>
             <h1 class="page-title">Settings</h1>
-            <p class="page-sub">Manage your profile, notifications, appearance and security.</p>
+          </div>
+          <div class="page-intro">
+            <p class="page-sub">Manage your profile, notifications, appearance and security. Preferences are saved in this browser.</p>
           </div>
         </div>
 
         <div class="settings-layout" data-tabs>
-          <div class="settings-nav" role="tablist" aria-label="Settings sections" aria-orientation="vertical">
-            <button type="button" class="settings-tab" role="tab" id="tab-profile" aria-controls="panel-profile" aria-selected="true" data-hash="profile"><span data-icon="user"></span>Profile</button>
-            <button type="button" class="settings-tab" role="tab" id="tab-notifications" aria-controls="panel-notifications" aria-selected="false" tabindex="-1" data-hash="notifications"><span data-icon="bell"></span>Notifications</button>
-            <button type="button" class="settings-tab" role="tab" id="tab-appearance" aria-controls="panel-appearance" aria-selected="false" tabindex="-1" data-hash="appearance"><span data-icon="palette"></span>Appearance</button>
-            <button type="button" class="settings-tab" role="tab" id="tab-security" aria-controls="panel-security" aria-selected="false" tabindex="-1" data-hash="security"><span data-icon="shield"></span>Security</button>
+          <div class="settings-nav" role="tablist" aria-label="Settings sections">
+            <button type="button" class="settings-tab" role="tab" id="tab-profile" aria-controls="panel-profile" aria-selected="true" data-hash="profile"><span class="tab-index">01</span>Profile</button>
+            <button type="button" class="settings-tab" role="tab" id="tab-notifications" aria-controls="panel-notifications" aria-selected="false" tabindex="-1" data-hash="notifications"><span class="tab-index">02</span>Notifications</button>
+            <button type="button" class="settings-tab" role="tab" id="tab-appearance" aria-controls="panel-appearance" aria-selected="false" tabindex="-1" data-hash="appearance"><span class="tab-index">03</span>Appearance</button>
+            <button type="button" class="settings-tab" role="tab" id="tab-security" aria-controls="panel-security" aria-selected="false" tabindex="-1" data-hash="security"><span class="tab-index">04</span>Security</button>
           </div>
 
           <!-- Profile -->
           <section class="settings-panel" role="tabpanel" id="panel-profile" aria-labelledby="tab-profile" tabindex="0">
-            <form class="card" id="profile-form" novalidate>
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Profile</h2>
-                  <p class="card-sub">This information is visible to your teammates.</p>
-                </div>
+            <form class="settings-group" id="profile-form" novalidate>
+              <div class="group-head">
+                <h2 class="group-title">Profile</h2>
+                <p class="group-sub">This information is visible to your teammates across the workspace.</p>
               </div>
-              <div class="profile-top">
-                <span class="avatar avatar-xl" data-user-avatar style="--hue:225">AM</span>
-                <div>
-                  <p class="fw-600" data-user-name>Alex Morgan</p>
-                  <p class="text-sm muted" data-user-title>Head of Operations</p>
-                  <p class="hint">Your avatar uses your initials.</p>
+              <div class="group-body">
+                <div class="profile-top">
+                  <span class="avatar avatar-xl" data-user-avatar style="--hue:225">AM</span>
+                  <div>
+                    <p class="fw-600" data-user-name>Alex Morgan</p>
+                    <p class="text-sm muted" data-user-title>Head of Operations</p>
+                    <p class="hint">Your avatar uses your initials.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="form-grid">
-                <div class="field">
-                  <label class="label" for="profile-first">First name</label>
-                  <input class="input" id="profile-first" name="firstName" type="text" required minlength="2" maxlength="40" autocomplete="given-name">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="label" for="profile-first">First name</label>
+                    <input class="input" id="profile-first" name="firstName" type="text" required minlength="2" maxlength="40" autocomplete="given-name">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="profile-last">Last name</label>
+                    <input class="input" id="profile-last" name="lastName" type="text" required minlength="2" maxlength="40" autocomplete="family-name">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="profile-email">Email</label>
+                    <input class="input" id="profile-email" name="email" type="email" required autocomplete="email">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="profile-title">Job title</label>
+                    <input class="input" id="profile-title" name="title" type="text" required minlength="2" maxlength="60" autocomplete="organization-title">
+                  </div>
+                  <div class="field span-2">
+                    <label class="label" for="profile-timezone">Time zone</label>
+                    <select class="select" id="profile-timezone" name="timezone">
+                      <option value="America/Los_Angeles">(GMT−08:00) Pacific Time</option>
+                      <option value="America/New_York">(GMT−05:00) Eastern Time</option>
+                      <option value="Europe/London">(GMT+00:00) London</option>
+                      <option value="Africa/Lagos">(GMT+01:00) Lagos</option>
+                      <option value="Europe/Berlin">(GMT+01:00) Berlin</option>
+                      <option value="Asia/Dubai">(GMT+04:00) Dubai</option>
+                      <option value="Asia/Kolkata">(GMT+05:30) Mumbai</option>
+                      <option value="Asia/Tokyo">(GMT+09:00) Tokyo</option>
+                    </select>
+                  </div>
+                  <div class="field span-2">
+                    <label class="label" for="profile-bio">Bio <span class="optional">(optional)</span></label>
+                    <textarea class="textarea" id="profile-bio" name="bio" maxlength="240" aria-describedby="bio-count"></textarea>
+                    <p class="hint" id="bio-count">0 / 240</p>
+                  </div>
                 </div>
-                <div class="field">
-                  <label class="label" for="profile-last">Last name</label>
-                  <input class="input" id="profile-last" name="lastName" type="text" required minlength="2" maxlength="40" autocomplete="family-name">
+                <div class="form-actions">
+                  <button type="reset" class="btn btn-secondary">Discard changes</button>
+                  <button type="submit" class="btn btn-primary">Save profile</button>
                 </div>
-                <div class="field">
-                  <label class="label" for="profile-email">Email</label>
-                  <input class="input" id="profile-email" name="email" type="email" required autocomplete="email">
-                </div>
-                <div class="field">
-                  <label class="label" for="profile-title">Job title</label>
-                  <input class="input" id="profile-title" name="title" type="text" required minlength="2" maxlength="60" autocomplete="organization-title">
-                </div>
-                <div class="field span-2">
-                  <label class="label" for="profile-timezone">Time zone</label>
-                  <select class="select" id="profile-timezone" name="timezone">
-                    <option value="America/Los_Angeles">(GMT−08:00) Pacific Time</option>
-                    <option value="America/New_York">(GMT−05:00) Eastern Time</option>
-                    <option value="Europe/London">(GMT+00:00) London</option>
-                    <option value="Africa/Lagos">(GMT+01:00) Lagos</option>
-                    <option value="Europe/Berlin">(GMT+01:00) Berlin</option>
-                    <option value="Asia/Dubai">(GMT+04:00) Dubai</option>
-                    <option value="Asia/Kolkata">(GMT+05:30) Mumbai</option>
-                    <option value="Asia/Tokyo">(GMT+09:00) Tokyo</option>
-                  </select>
-                </div>
-                <div class="field span-2">
-                  <label class="label" for="profile-bio">Bio <span class="optional">(optional)</span></label>
-                  <textarea class="textarea" id="profile-bio" name="bio" maxlength="240" aria-describedby="bio-count"></textarea>
-                  <p class="hint" id="bio-count">0 / 240</p>
-                </div>
-              </div>
-              <div class="form-actions">
-                <button type="reset" class="btn btn-secondary">Discard changes</button>
-                <button type="submit" class="btn btn-primary">Save profile</button>
               </div>
             </form>
           </section>
 
           <!-- Notifications -->
           <section class="settings-panel" role="tabpanel" id="panel-notifications" aria-labelledby="tab-notifications" tabindex="0" hidden>
-            <div class="card">
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Email notifications</h2>
-                  <p class="card-sub">Choose which updates reach your inbox.</p>
+            <div class="settings-group">
+              <div class="group-head">
+                <h2 class="group-title">Email notifications</h2>
+                <p class="group-sub">Choose which updates reach your inbox.</p>
+              </div>
+              <div class="group-body">
+                <div class="setting-row">
+                  <label for="n-email_assigned"><strong>Task assigned to me</strong><span class="desc">When someone assigns you a new task.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="n-email_assigned" data-pref="email_assigned"><span class="switch-track"></span></span>
                 </div>
-              </div>
-              <div class="setting-row">
-                <label for="n-email_assigned"><strong>Task assigned to me</strong><span class="desc">When someone assigns you a new task.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="n-email_assigned" data-pref="email_assigned"><span class="switch-track"></span></span>
-              </div>
-              <div class="setting-row">
-                <label for="n-email_mentions"><strong>Mentions &amp; comments</strong><span class="desc">When you are mentioned or someone replies to you.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="n-email_mentions" data-pref="email_mentions"><span class="switch-track"></span></span>
-              </div>
-              <div class="setting-row">
-                <label for="n-email_projects"><strong>Project status changes</strong><span class="desc">When a project you follow changes status.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="n-email_projects" data-pref="email_projects"><span class="switch-track"></span></span>
-              </div>
-              <div class="setting-row">
-                <label for="n-email_digest"><strong>Weekly digest</strong><span class="desc">A Monday summary of wins, blockers and deadlines.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="n-email_digest" data-pref="email_digest"><span class="switch-track"></span></span>
+                <div class="setting-row">
+                  <label for="n-email_mentions"><strong>Mentions &amp; comments</strong><span class="desc">When you are mentioned or someone replies to you.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="n-email_mentions" data-pref="email_mentions"><span class="switch-track"></span></span>
+                </div>
+                <div class="setting-row">
+                  <label for="n-email_projects"><strong>Project status changes</strong><span class="desc">When a project you follow changes status.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="n-email_projects" data-pref="email_projects"><span class="switch-track"></span></span>
+                </div>
+                <div class="setting-row">
+                  <label for="n-email_digest"><strong>Weekly digest</strong><span class="desc">A Monday summary of wins, blockers and deadlines.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="n-email_digest" data-pref="email_digest"><span class="switch-track"></span></span>
+                </div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">In-app &amp; push</h2>
-                  <p class="card-sub">Real-time alerts while you work.</p>
+            <div class="settings-group">
+              <div class="group-head">
+                <h2 class="group-title">In-app &amp; push</h2>
+                <p class="group-sub">Real-time alerts while you work.</p>
+              </div>
+              <div class="group-body">
+                <div class="setting-row">
+                  <label for="n-push_desktop"><strong>Desktop notifications</strong><span class="desc">Show alerts on this device.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="n-push_desktop" data-pref="push_desktop"><span class="switch-track"></span></span>
                 </div>
-              </div>
-              <div class="setting-row">
-                <label for="n-push_desktop"><strong>Desktop notifications</strong><span class="desc">Show alerts on this device.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="n-push_desktop" data-pref="push_desktop"><span class="switch-track"></span></span>
-              </div>
-              <div class="setting-row">
-                <label for="n-push_reminders"><strong>Deadline reminders</strong><span class="desc">Remind me 24 hours before a task is due.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="n-push_reminders" data-pref="push_reminders"><span class="switch-track"></span></span>
-              </div>
-              <div class="setting-row">
-                <label for="n-push_team"><strong>Team activity</strong><span class="desc">When teammates complete tasks in your projects.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="n-push_team" data-pref="push_team"><span class="switch-track"></span></span>
-              </div>
-              <div class="setting-row stack-sm">
-                <label for="n-quiet"><strong>Quiet hours</strong><span class="desc">Pause non-urgent notifications during focus time.</span></label>
-                <select class="select" id="n-quiet" data-pref="quietHours">
-                  <option value="off">Off</option>
-                  <option value="20-08">8:00 PM – 8:00 AM</option>
-                  <option value="22-07">10:00 PM – 7:00 AM</option>
-                  <option value="00-09">12:00 AM – 9:00 AM</option>
-                </select>
+                <div class="setting-row">
+                  <label for="n-push_reminders"><strong>Deadline reminders</strong><span class="desc">Remind me 24 hours before a task is due.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="n-push_reminders" data-pref="push_reminders"><span class="switch-track"></span></span>
+                </div>
+                <div class="setting-row">
+                  <label for="n-push_team"><strong>Team activity</strong><span class="desc">When teammates complete tasks in your projects.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="n-push_team" data-pref="push_team"><span class="switch-track"></span></span>
+                </div>
+                <div class="setting-row stack-sm">
+                  <label for="n-quiet"><strong>Quiet hours</strong><span class="desc">Pause non-urgent notifications during focus time.</span></label>
+                  <select class="select" id="n-quiet" data-pref="quietHours">
+                    <option value="off">Off</option>
+                    <option value="20-08">8:00 PM – 8:00 AM</option>
+                    <option value="22-07">10:00 PM – 7:00 AM</option>
+                    <option value="00-09">12:00 AM – 9:00 AM</option>
+                  </select>
+                </div>
               </div>
             </div>
           </section>
 
           <!-- Appearance -->
           <section class="settings-panel" role="tabpanel" id="panel-appearance" aria-labelledby="tab-appearance" tabindex="0" hidden>
-            <div class="card">
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Accent color</h2>
-                  <p class="card-sub">Used for buttons, highlights and charts.</p>
-                </div>
+            <div class="settings-group">
+              <div class="group-head">
+                <h2 class="group-title">Accent color</h2>
+                <p class="group-sub">Used for primary buttons, highlights and charts.</p>
               </div>
-              <fieldset>
+              <fieldset class="group-body">
                 <legend class="sr-only">Accent color</legend>
                 <div class="option-grid">
-                  <label class="option"><input type="radio" name="accent" value="blue"><span class="option-body"><span class="swatch" style="--c1:#5b8cff;--c2:#8b5cf6"></span>Blue</span></label>
-                  <label class="option"><input type="radio" name="accent" value="violet"><span class="option-body"><span class="swatch" style="--c1:#8b5cf6;--c2:#d946ef"></span>Violet</span></label>
-                  <label class="option"><input type="radio" name="accent" value="cyan"><span class="option-body"><span class="swatch" style="--c1:#22d3ee;--c2:#3b82f6"></span>Cyan</span></label>
-                  <label class="option"><input type="radio" name="accent" value="emerald"><span class="option-body"><span class="swatch" style="--c1:#10b981;--c2:#22d3ee"></span>Emerald</span></label>
+                  <label class="option"><input type="radio" name="accent" value="forest"><span class="option-body"><span class="swatch" style="--c1:#1f4d3a"></span>Forest</span></label>
+                  <label class="option"><input type="radio" name="accent" value="ink"><span class="option-body"><span class="swatch" style="--c1:#161614"></span>Ink</span></label>
+                  <label class="option"><input type="radio" name="accent" value="clay"><span class="option-body"><span class="swatch" style="--c1:#9a4a2e"></span>Clay</span></label>
+                  <label class="option"><input type="radio" name="accent" value="ocean"><span class="option-body"><span class="swatch" style="--c1:#1f4a63"></span>Ocean</span></label>
                 </div>
               </fieldset>
             </div>
 
-            <div class="card">
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Layout density</h2>
-                  <p class="card-sub">Control how much information fits on screen.</p>
-                </div>
+            <div class="settings-group">
+              <div class="group-head">
+                <h2 class="group-title">Layout density</h2>
+                <p class="group-sub">Control how much information fits on screen.</p>
               </div>
-              <fieldset>
+              <fieldset class="group-body">
                 <legend class="sr-only">Layout density</legend>
                 <div class="option-grid cols-2">
                   <label class="option"><input type="radio" name="density" value="comfortable"><span class="option-body">Comfortable<small>Generous spacing, ideal for larger screens.</small></span></label>
@@ -193,85 +191,90 @@
               </fieldset>
             </div>
 
-            <div class="card">
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Accessibility</h2>
-                  <p class="card-sub">Make the interface easier on your eyes.</p>
+            <div class="settings-group">
+              <div class="group-head">
+                <h2 class="group-title">Accessibility</h2>
+                <p class="group-sub">Make the interface easier to read and calmer to use.</p>
+              </div>
+              <div class="group-body">
+                <div class="setting-row">
+                  <label for="a-contrast"><strong>Increase contrast</strong><span class="desc">Darker secondary text and stronger dividing lines.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="a-contrast" data-appearance="contrast"><span class="switch-track"></span></span>
                 </div>
-              </div>
-              <div class="setting-row">
-                <label for="a-transparency"><strong>Reduce transparency</strong><span class="desc">Replace frosted glass with solid surfaces.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="a-transparency" data-appearance="transparency"><span class="switch-track"></span></span>
-              </div>
-              <div class="setting-row">
-                <label for="a-motion"><strong>Reduce motion</strong><span class="desc">Minimize animations and transitions.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="a-motion" data-appearance="motion"><span class="switch-track"></span></span>
+                <div class="setting-row">
+                  <label for="a-motion"><strong>Reduce motion</strong><span class="desc">Minimize animations and transitions.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="a-motion" data-appearance="motion"><span class="switch-track"></span></span>
+                </div>
               </div>
             </div>
           </section>
 
           <!-- Security -->
           <section class="settings-panel" role="tabpanel" id="panel-security" aria-labelledby="tab-security" tabindex="0" hidden>
-            <form class="card" id="password-form" novalidate>
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Change password</h2>
-                  <p class="card-sub">Use at least 8 characters with a mix of letters, numbers and symbols.</p>
-                </div>
+            <form class="settings-group" id="password-form" novalidate>
+              <div class="group-head">
+                <h2 class="group-title">Change password</h2>
+                <p class="group-sub">Use at least 8 characters with a mix of letters, numbers and symbols.</p>
               </div>
-              <div class="form-grid">
-                <div class="field span-2">
-                  <label class="label" for="pw-current">Current password</label>
-                  <input class="input" id="pw-current" name="current" type="password" required minlength="6" autocomplete="current-password">
+              <div class="group-body">
+                <div class="form-grid">
+                  <div class="field span-2">
+                    <label class="label" for="pw-current">Current password</label>
+                    <input class="input" id="pw-current" name="current" type="password" required minlength="6" autocomplete="current-password">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="pw-new">New password</label>
+                    <input class="input" id="pw-new" name="password" type="password" required minlength="8" autocomplete="new-password" aria-describedby="pw-strength-label">
+                    <div class="strength" id="pw-strength" data-score="0" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                    <p class="hint" id="pw-strength-label">Password strength: —</p>
+                  </div>
+                  <div class="field">
+                    <label class="label" for="pw-confirm">Confirm new password</label>
+                    <input class="input" id="pw-confirm" name="confirm" type="password" required autocomplete="new-password" data-match="password" data-label="Password confirmation">
+                  </div>
                 </div>
-                <div class="field">
-                  <label class="label" for="pw-new">New password</label>
-                  <input class="input" id="pw-new" name="password" type="password" required minlength="8" autocomplete="new-password" aria-describedby="pw-strength-label">
-                  <div class="strength" id="pw-strength" data-score="0" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-                  <p class="hint" id="pw-strength-label">Password strength: —</p>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Update password</button>
                 </div>
-                <div class="field">
-                  <label class="label" for="pw-confirm">Confirm new password</label>
-                  <input class="input" id="pw-confirm" name="confirm" type="password" required autocomplete="new-password" data-match="password" data-label="Password confirmation">
-                </div>
-              </div>
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Update password</button>
               </div>
             </form>
 
-            <div class="card">
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Two-factor authentication</h2>
-                  <p class="card-sub">Add an extra layer of security to your account.</p>
-                </div>
+            <div class="settings-group">
+              <div class="group-head">
+                <h2 class="group-title">Two-factor authentication</h2>
+                <p class="group-sub">Add an extra layer of security to your account.</p>
               </div>
-              <div class="setting-row">
-                <label for="s-2fa"><strong>Authenticator app</strong><span class="desc" id="s-2fa-desc">Require a code from your authenticator app when signing in.</span></label>
-                <span class="switch"><input type="checkbox" role="switch" id="s-2fa" data-pref="twoFactor"><span class="switch-track"></span></span>
+              <div class="group-body">
+                <div class="setting-row">
+                  <label for="s-2fa"><strong>Authenticator app</strong><span class="desc" id="s-2fa-desc">Require a code from your authenticator app when signing in.</span></label>
+                  <span class="switch"><input type="checkbox" role="switch" id="s-2fa" data-pref="twoFactor"><span class="switch-track"></span></span>
+                </div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Active sessions</h2>
-                  <p class="card-sub">Devices currently signed in to your account.</p>
-                </div>
-                <button type="button" class="btn btn-secondary btn-sm" data-action="revoke-all">Sign out other sessions</button>
+            <div class="settings-group">
+              <div class="group-head">
+                <h2 class="group-title">Active sessions</h2>
+                <p class="group-sub">Devices currently signed in to your account.</p>
               </div>
-              <ul class="list" id="session-list"></ul>
+              <div class="group-body">
+                <ul class="list" id="session-list"></ul>
+                <div class="form-actions">
+                  <button type="button" class="btn btn-secondary btn-sm" data-action="revoke-all">Sign out other sessions</button>
+                </div>
+              </div>
             </div>
 
-            <div class="card danger-zone">
-              <div class="card-head">
-                <div>
-                  <h2 class="card-title">Danger zone</h2>
-                  <p class="card-sub">Restore the demo workspace to its original sample data. This clears everything saved in this browser.</p>
+            <div class="settings-group danger-zone">
+              <div class="group-head">
+                <h2 class="group-title">Danger zone</h2>
+                <p class="group-sub">Restore the demo workspace to its original sample data. This clears everything saved in this browser.</p>
+              </div>
+              <div class="group-body">
+                <div class="setting-row">
+                  <div class="setting-text"><strong>Reset demo data</strong><span class="desc">Projects, tasks, team changes and preferences are replaced with the sample workspace.</span></div>
+                  <button type="button" class="btn btn-danger" data-action="reset-demo"><span data-icon="refresh" data-icon-class="icon-sm"></span>Reset demo data</button>
                 </div>
-                <button type="button" class="btn btn-danger" data-action="reset-demo"><span data-icon="refresh" data-icon-class="icon-sm"></span>Reset demo data</button>
               </div>
             </div>
           </section>

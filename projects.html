@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects · NEXORA</title>
-  <meta name="description" content="Manage every project in your NEXORA workspace: status, progress, due dates, priority and team.">
-  <meta name="theme-color" content="#060913">
+  <meta name="description" content="Manage every project in your NEXORA workspace: status, progress, owner, deadline and team.">
+  <meta name="theme-color" content="#faf8f3">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="css/styles.css">
   <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
 </head>
@@ -24,13 +24,15 @@
 
       <main class="page" id="main" tabindex="-1">
         <div class="page-header">
-          <div>
-            <p class="eyebrow">Workspace</p>
+          <div class="page-heading">
+            <p class="eyebrow"><span class="eyebrow-index">02</span>Workspace</p>
             <h1 class="page-title">Projects</h1>
-            <p class="page-sub" id="project-count" aria-live="polite">Loading projects…</p>
           </div>
-          <div class="page-actions">
-            <button type="button" class="btn btn-primary" data-open-modal="project-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>Add project</button>
+          <div class="page-intro">
+            <p class="page-sub" id="project-count">Loading projects…</p>
+            <div class="page-actions">
+              <button type="button" class="btn btn-primary" data-open-modal="project-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>Add project</button>
+            </div>
           </div>
         </div>
 
@@ -52,7 +54,7 @@
             </select>
             <label class="sr-only" for="project-sort">Sort projects</label>
             <select class="select" id="project-sort">
-              <option value="due">Sort: Due date</option>
+              <option value="due">Sort: Deadline</option>
               <option value="progress">Sort: Progress</option>
               <option value="priority">Sort: Priority</option>
               <option value="name">Sort: Name</option>
@@ -69,10 +71,25 @@
           <button type="button" class="chip" aria-pressed="false" data-filter="completed">Completed <span class="count" data-count="completed">0</span></button>
         </div>
 
-        <section class="project-grid" id="project-grid" aria-label="Projects">
-          <div class="skeleton sk-card"></div>
-          <div class="skeleton sk-card"></div>
-          <div class="skeleton sk-card"></div>
+        <section class="data-list" aria-label="Projects">
+          <div class="proj-head" aria-hidden="true">
+            <span>Project</span>
+            <span>Status</span>
+            <span>Progress</span>
+            <span>Owner</span>
+            <span>Deadline</span>
+            <span class="col-team">Team</span>
+            <span></span>
+          </div>
+          <ul class="proj-list" id="project-grid">
+            <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span><span class="skeleton sk-line w-40"></span></span></li>
+            <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span><span class="skeleton sk-line w-40"></span></span></li>
+            <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span><span class="skeleton sk-line w-40"></span></span></li>
+          </ul>
+          <div class="list-foot">
+            <span id="project-result-count" aria-live="polite">—</span>
+            <span>Changes are saved in this browser</span>
+          </div>
         </section>
       </main>
     </div>
@@ -84,7 +101,7 @@
         <span class="modal-icon" data-icon="folder" aria-hidden="true"></span>
         <div>
           <h2 class="modal-title" id="project-modal-title" data-edit-text="Edit project">Add project</h2>
-          <p class="modal-sub" data-edit-text="Update the details, progress and team for this project.">Set up a new project and choose who is working on it.</p>
+          <p class="modal-sub" data-edit-text="Update the details, owner, progress and team for this project.">Set up a new project, choose an owner and who is working on it.</p>
         </div>
         <button type="button" class="btn-icon sm" data-close-modal aria-label="Close dialog"><span data-icon="x"></span></button>
       </div>
@@ -116,13 +133,17 @@
               <option value="low">Low</option>
             </select>
           </div>
-          <div class="field span-2" data-edit-half>
-            <label class="label" for="project-due">Due date</label>
-            <input class="input" id="project-due" name="due" type="date" required data-future-date>
+          <div class="field">
+            <label class="label" for="project-owner">Owner</label>
+            <select class="select" id="project-owner" name="owner" required data-label="Owner"></select>
           </div>
-          <div class="field" data-edit-only hidden>
+          <div class="field">
+            <label class="label" for="project-due">Deadline</label>
+            <input class="input" id="project-due" name="due" type="date" required data-future-date data-label="Deadline">
+          </div>
+          <div class="field span-2" data-edit-only hidden>
             <label class="label" for="project-progress-input">Progress (%)</label>
-            <input class="input" id="project-progress-input" name="progress" type="number" min="0" max="100" step="1" required inputmode="numeric">
+            <input class="input" id="project-progress-input" name="progress" type="number" min="0" max="100" step="1" required inputmode="numeric" data-label="Progress">
           </div>
           <fieldset class="field span-2" id="project-members-field">
             <legend class="label">Team members</legend>

@@ -207,14 +207,14 @@
         { id: 'm8', name: 'Ethan Brooks', role: 'Data Analyst', department: 'Operations', email: 'ethan@nexora.io', status: 'offline', tasksCompleted: 109, hue: 280 },
       ],
       projects: [
-        { id: 'p1', name: 'Atlas Mobile App', description: 'Rebuild of the iOS and Android apps with offline sync and a refreshed navigation model.', status: 'active', priority: 'high', progress: 68, due: isoIn(12), members: ['m1', 'm3', 'm5', 'm6'], hue: 220 },
-        { id: 'p2', name: 'Payments API v3', description: 'Idempotent payments API with webhooks, automatic retries and multi-currency support.', status: 'active', priority: 'high', progress: 45, due: isoIn(21), members: ['m2', 'm4', 'm6'], hue: 262 },
-        { id: 'p3', name: 'Q4 Growth Campaign', description: 'Integrated launch campaign across email, paid social and partner channels.', status: 'planning', priority: 'medium', progress: 18, due: isoIn(34), members: ['m7', 'm5', 'm8'], hue: 35 },
-        { id: 'p4', name: 'Customer Portal', description: 'Self-serve portal for billing, invoices, seat management and support tickets.', status: 'review', priority: 'medium', progress: 88, due: isoIn(5), members: ['m3', 'm4', 'm1'], hue: 190 },
-        { id: 'p5', name: 'Data Warehouse Migration', description: 'Move analytics pipelines to the new warehouse with zero reporting downtime.', status: 'on-hold', priority: 'low', progress: 32, due: isoIn(48), members: ['m8', 'm4'], hue: 150 },
-        { id: 'p6', name: 'Design System 2.0', description: 'Tokens, components and documentation shared across web and mobile products.', status: 'active', priority: 'medium', progress: 74, due: isoIn(9), members: ['m5', 'm3', 'm1'], hue: 300 },
-        { id: 'p7', name: 'Onboarding Revamp', description: 'Guided setup, templates and in-app checklists to improve week-one activation.', status: 'completed', priority: 'high', progress: 100, due: isoIn(-6), members: ['m1', 'm5', 'm7'], hue: 340 },
-        { id: 'p8', name: 'Security Audit 2026', description: 'Annual SOC 2 readiness review, penetration test fixes and access reviews.', status: 'active', priority: 'high', progress: 56, due: isoIn(16), members: ['m2', 'm6', 'm8'], hue: 0 },
+        { id: 'p1', name: 'Atlas Mobile App', description: 'Rebuild of the iOS and Android apps with offline sync and a refreshed navigation model.', status: 'active', priority: 'high', progress: 68, due: isoIn(12), owner: 'm1', members: ['m1', 'm3', 'm5', 'm6'], hue: 220 },
+        { id: 'p2', name: 'Payments API v3', description: 'Idempotent payments API with webhooks, automatic retries and multi-currency support.', status: 'active', priority: 'high', progress: 45, due: isoIn(21), owner: 'm2', members: ['m2', 'm4', 'm6'], hue: 262 },
+        { id: 'p3', name: 'Q4 Growth Campaign', description: 'Integrated launch campaign across email, paid social and partner channels.', status: 'planning', priority: 'medium', progress: 18, due: isoIn(34), owner: 'm7', members: ['m7', 'm5', 'm8'], hue: 35 },
+        { id: 'p4', name: 'Customer Portal', description: 'Self-serve portal for billing, invoices, seat management and support tickets.', status: 'review', priority: 'medium', progress: 88, due: isoIn(5), owner: 'm3', members: ['m3', 'm4', 'm1'], hue: 190 },
+        { id: 'p5', name: 'Data Warehouse Migration', description: 'Move analytics pipelines to the new warehouse with zero reporting downtime.', status: 'on-hold', priority: 'low', progress: 32, due: isoIn(48), owner: 'm8', members: ['m8', 'm4'], hue: 150 },
+        { id: 'p6', name: 'Design System 2.0', description: 'Tokens, components and documentation shared across web and mobile products.', status: 'active', priority: 'medium', progress: 74, due: isoIn(9), owner: 'm5', members: ['m5', 'm3', 'm1'], hue: 300 },
+        { id: 'p7', name: 'Onboarding Revamp', description: 'Guided setup, templates and in-app checklists to improve week-one activation.', status: 'completed', priority: 'high', progress: 100, due: isoIn(-6), owner: 'm1', members: ['m1', 'm5', 'm7'], hue: 340 },
+        { id: 'p8', name: 'Security Audit 2026', description: 'Annual SOC 2 readiness review, penetration test fixes and access reviews.', status: 'active', priority: 'high', progress: 56, due: isoIn(16), owner: 'm2', members: ['m2', 'm6', 'm8'], hue: 0 },
       ],
       tasks: [
         { id: 't1', title: 'Finalize offline sync conflict rules', project: 'p1', status: 'in-progress', priority: 'high', assignee: 'm3', due: isoIn(1) },
@@ -302,6 +302,7 @@
   const memberById = (id) =>
     id === 'me' ? me() : store.data.members.find((m) => m.id === id) || { id, name: 'Unassigned', role: '', hue: 220 };
   const projectById = (id) => store.data.projects.find((p) => p.id === id);
+  const ownerOf = (p) => memberById(p.owner || p.members[0] || 'me');
   const tasksFor = (projectId) => store.data.tasks.filter((t) => t.project === projectId);
   const completedBy = (m) => m.tasksCompleted + store.data.tasks.filter((t) => t.assignee === m.id && t.status === 'done').length;
   const activeProjectsFor = (id) => store.data.projects.filter((p) => p.members.includes(id) && p.status !== 'completed').length;
@@ -336,7 +337,7 @@
     `<span class="badge${dot ? ' badge-dot' : ''}" data-tone="${cfg.tone}">${esc(cfg.label)}</span>`;
 
   const priorityBadge = (p) =>
-    `<span class="badge" data-tone="${PRIORITY[p].tone}">${icon('flag', 'icon-xs')}${PRIORITY[p].label}<span class="sr-only"> priority</span></span>`;
+    `<span class="priority" data-tone="${PRIORITY[p].tone}" data-level="${3 - PRIORITY[p].rank}"><span class="pri-bars" aria-hidden="true"><i></i><i></i><i></i></span>${PRIORITY[p].label}<span class="sr-only"> priority</span></span>`;
 
   function avatarStack(ids, max = 4) {
     const list = ids.map(memberById);
@@ -765,7 +766,7 @@
   }
   function applyAppearance(ap) {
     const root = document.documentElement;
-    ['accent', 'density', 'motion', 'transparency'].forEach((key) => {
+    ['accent', 'density', 'motion', 'contrast'].forEach((key) => {
       if (ap[key]) root.setAttribute(`data-${key}`, ap[key]);
       else root.removeAttribute(`data-${key}`);
     });
@@ -812,7 +813,7 @@
         <p class="nav-label" id="nav-heading">Menu</p>
         <ul class="nav-list" aria-labelledby="nav-heading">
           ${NAV.map(
-            (n) => `<li><a class="nav-link" href="${n.href}"${n.id === page ? ' aria-current="page"' : ''}>${icon(n.icon)}<span>${n.label}</span>${
+            (n, i) => `<li><a class="nav-link" href="${n.href}"${n.id === page ? ' aria-current="page"' : ''}><span class="nav-index" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><span>${n.label}</span>${
               n.count ? `<span class="nav-count" data-nav-count="${n.id}">${n.count()}</span>` : ''
             }</a></li>`
           ).join('')}
@@ -823,7 +824,7 @@
       <div class="sidebar-spacer"></div>
       <div class="plan-card" data-plan-card></div>
       <div class="sidebar-foot">
-        <a class="nav-link" href="settings.html"${page === 'settings' ? ' aria-current="page"' : ''}>${icon('settings')}<span>Settings</span></a>
+        <a class="nav-link" href="settings.html"${page === 'settings' ? ' aria-current="page"' : ''}><span class="nav-index" aria-hidden="true">06</span><span>Settings</span></a>
         <a class="sidebar-user" href="settings.html#profile">
           <span class="avatar avatar-sm" data-user-avatar style="--hue:${u.hue}" aria-hidden="true">${esc(initials(u.name))}</span>
           <span class="min0">
@@ -843,7 +844,7 @@
     const seats = store.data.members.length + 1;
     const pct = Math.min(100, Math.round((seats / SEAT_LIMIT) * 100));
     el.innerHTML = `
-      <div class="row between"><strong>Seats</strong><span class="text-xs muted num">${seats} / ${SEAT_LIMIT}</span></div>
+      <div class="row between"><strong>Seats used</strong><span class="text-xs muted num mono">${seats} / ${SEAT_LIMIT}</span></div>
       ${progressBar(pct, 'Seats used')}
       <p>${SEAT_LIMIT - seats} seats left on the Pro plan</p>`;
   }
@@ -1268,7 +1269,6 @@
   }
 
   /* 7. Charts ------------------------------------------------------------- */
-  let chartSeq = 0;
 
   function niceScale(maxValue, ticks = 4) {
     const raw = Math.max(maxValue, 1) / ticks;
@@ -1293,15 +1293,6 @@
         }
       }).observe(el);
     }
-  }
-
-  function smoothPath(pts) {
-    return pts.reduce((d, [x, y], i) => {
-      if (i === 0) return `M${r1(x)},${r1(y)}`;
-      const [px, py] = pts[i - 1];
-      const cx = r1((px + x) / 2);
-      return `${d} C${cx},${r1(py)} ${cx},${r1(y)} ${r1(x)},${r1(y)}`;
-    }, '');
   }
 
   function axisMarkup({ width, pad, h, max, step, labels, xAt }) {
@@ -1351,7 +1342,6 @@
 
   function lineChart(el, { labels, series, height: baseHeight = 260, label = 'Line chart' }) {
     if (!el) return;
-    const id = `chart${++chartSeq}`;
     mountChart(el, (width) => {
       const height = chartHeight(baseHeight, width);
       const pad = { t: 16, r: 10, b: 32, l: 44 };
@@ -1363,22 +1353,21 @@
       const yAt = (v) => pad.t + h - (v / max) * h;
       const colW = n > 1 ? w / (n - 1) : w;
 
-      let svg = `<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" aria-label="${esc(label)}"><defs>`;
-      series.forEach((s, si) => {
-        svg += `<linearGradient id="${id}-g${si}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${s.color}" stop-opacity="${si === 0 ? 0.2 : 0.06}"/><stop offset="1" stop-color="${s.color}" stop-opacity="0"/></linearGradient>`;
-      });
-      svg += `</defs>${axisMarkup({ width, pad, h, max, step, labels, xAt })}`;
+      let svg = `<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" aria-label="${esc(label)}">`;
+      svg += axisMarkup({ width, pad, h, max, step, labels, xAt });
       series.forEach((s, si) => {
         const pts = s.values.map((v, i) => [xAt(i), yAt(v)]);
-        const d = smoothPath(pts);
-        svg += `<path d="${d} L${r1(pts[pts.length - 1][0])},${pad.t + h} L${r1(pts[0][0])},${pad.t + h} Z" fill="url(#${id}-g${si})"/>`;
+        const d = pts.map(([x, y], i) => `${i ? 'L' : 'M'}${r1(x)},${r1(y)}`).join(' ');
+        if (si === 0) {
+          svg += `<path class="area" d="${d} L${r1(pts[pts.length - 1][0])},${pad.t + h} L${r1(pts[0][0])},${pad.t + h} Z" fill="${s.color}" fill-opacity="0.07"/>`;
+        }
         svg += `<path class="line${si > 0 ? ' secondary' : ''}" d="${d}" stroke="${s.color}"/>`;
       });
       svg += `<line class="hover-line" x1="0" x2="0" y1="${pad.t}" y2="${pad.t + h}" opacity="0"/>`;
       labels.forEach((_, i) => {
         svg += `<g class="col" data-i="${i}">`;
         series.forEach((s) => {
-          svg += `<circle class="dot" cx="${r1(xAt(i))}" cy="${r1(yAt(s.values[i]))}" r="4" fill="#0b1122" stroke="${s.color}" stroke-width="2"/>`;
+          svg += `<rect class="dot" x="${r1(xAt(i) - 3.5)}" y="${r1(yAt(s.values[i]) - 3.5)}" width="7" height="7" stroke="${s.color}" stroke-width="1.5"/>`;
         });
         const x0 = Math.max(pad.l, xAt(i) - colW / 2);
         const x1 = Math.min(width - pad.r, xAt(i) + colW / 2);
@@ -1392,7 +1381,6 @@
 
   function barChart(el, { labels, series, height: baseHeight = 240, label = 'Bar chart' }) {
     if (!el) return;
-    const id = `chart${++chartSeq}`;
     mountChart(el, (width) => {
       const height = chartHeight(baseHeight, width);
       const pad = { t: 16, r: 6, b: 32, l: 44 };
@@ -1406,17 +1394,14 @@
       const innerW = barW * series.length + gap * (series.length - 1);
       const xAt = (i) => pad.l + groupW * (i + 0.5);
 
-      let svg = `<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" aria-label="${esc(label)}"><defs>`;
-      series.forEach((s, si) => {
-        svg += `<linearGradient id="${id}-g${si}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${s.color}"/><stop offset="1" stop-color="${s.color}" stop-opacity="0.35"/></linearGradient>`;
-      });
-      svg += `</defs>${axisMarkup({ width, pad, h, max, step, labels, xAt })}`;
+      let svg = `<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" aria-label="${esc(label)}">`;
+      svg += axisMarkup({ width, pad, h, max, step, labels, xAt });
       labels.forEach((_, i) => {
         svg += `<g class="col" data-i="${i}">`;
         series.forEach((s, si) => {
           const bh = Math.max(2, (s.values[i] / max) * h);
           const x = xAt(i) - innerW / 2 + si * (barW + gap);
-          svg += `<rect class="bar" x="${r1(x)}" y="${r1(pad.t + h - bh)}" width="${r1(barW)}" height="${r1(bh)}" rx="${Math.min(4, barW / 2)}" fill="url(#${id}-g${si})"/>`;
+          svg += `<rect class="bar" x="${r1(x)}" y="${r1(pad.t + h - bh)}" width="${r1(barW)}" height="${r1(bh)}" fill="${s.color}"/>`;
         });
         svg += `<rect x="${r1(pad.l + groupW * i)}" y="${pad.t}" width="${r1(groupW)}" height="${h}" fill="transparent"/></g>`;
       });
@@ -1426,32 +1411,24 @@
     });
   }
 
-  function donutChart(el, { segments, centerValue, centerLabel }) {
+  /** Horizontal stacked composition bar with a tabular legend. */
+  function compositionChart(el, { segments, centerValue, centerLabel }) {
     if (!el) return;
-    const total = segments.reduce((sum, s) => sum + s.value, 0) || 1;
-    const r = 70;
-    const c = 2 * Math.PI * r;
-    let offset = 0;
-    const arcs = segments
-      .filter((s) => s.value > 0)
-      .map((s) => {
-        const len = (s.value / total) * c;
-        const arc = `<circle cx="90" cy="90" r="${r}" fill="none" stroke="${s.color}" stroke-width="18" stroke-dasharray="${r1(Math.max(len - 3, 0.5))} ${r1(c)}" stroke-dashoffset="${r1(-offset)}" transform="rotate(-90 90 90)"/>`;
-        offset += len;
-        return arc;
-      })
-      .join('');
+    const total = segments.reduce((sum, s) => sum + s.value, 0);
+    const pct = (v) => (total ? Math.round((v / total) * 100) : 0);
     const summary = segments.map((s) => `${s.label}: ${s.value}`).join(', ');
     el.innerHTML = `
-      <div class="donut">
-        <svg viewBox="0 0 180 180" role="img" aria-label="${esc(`${centerLabel} ${centerValue}. ${summary}`)}">
-          <circle cx="90" cy="90" r="${r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="18"/>${arcs}
-        </svg>
-        <div class="donut-center" aria-hidden="true"><strong>${esc(centerValue)}</strong><span>${esc(centerLabel)}</span></div>
-      </div>
-      <ul class="donut-legend">
-        ${segments.map((s) => `<li><span class="legend-dot" style="--c:${s.color}"></span>${esc(s.label)}<b>${s.value}</b></li>`).join('')}
-      </ul>`;
+      <div class="composition">
+        <div class="comp-total"><strong class="num">${esc(centerValue)}</strong><span>${esc(centerLabel)}</span></div>
+        <div class="comp-bar" role="img" aria-label="${esc(`${centerLabel} ${centerValue}. ${summary}`)}">
+          ${segments.filter((s) => s.value > 0).map((s) => `<span style="--c:${s.color};flex:${s.value}"></span>`).join('')}
+        </div>
+        <ul class="comp-legend">
+          ${segments
+            .map((s) => `<li><span class="legend-dot" style="--c:${s.color}"></span>${esc(s.label)}<b class="num">${s.value}</b><em class="num">${pct(s.value)}%</em></li>`)
+            .join('')}
+        </ul>
+      </div>`;
   }
 
   /** Stable demo time series for the dashboard and analytics charts. */
@@ -1495,7 +1472,7 @@
     return { labels, completed, created };
   }
 
-  const chartColors = () => ({ a: cssVar('--accent') || '#5b8cff', b: cssVar('--accent-2') || '#8b5cf6' });
+  const chartColors = () => ({ a: cssVar('--chart-1') || '#1f4d3a', b: cssVar('--chart-2') || '#b9ad94' });
 
   /* 8. Page modules ------------------------------------------------------- */
   const PAGES = {};
@@ -1573,22 +1550,21 @@
 
       const projects = d.projects.filter((p) => p.status !== 'completed').sort((a, b) => a.due.localeCompare(b.due)).slice(0, 4);
       $('#recent-projects').innerHTML = projects.length
-        ? projects
-            .map(
-              (p) => `<li class="project-row">
-                ${projectGlyph(p)}
-                <div class="min0">
-                  <a class="item-title truncate" href="projects.html?q=${encodeURIComponent(p.name)}">${esc(p.name)}</a>
-                  <div class="row tight meta-row">${badge(PROJECT_STATUS[p.status], true)}<span class="item-meta">Due ${fmtDate(p.due)}</span></div>
-                </div>
-                <div class="progress-wrap">
-                  <div class="row"><span>${plural(p.members.length, 'member')}</span><strong>${p.progress}%</strong></div>
-                  ${progressBar(p.progress, `${p.name} progress`)}
-                </div>
-              </li>`
-            )
-            .join('')
-        : `<li>${emptyState('folder', 'No active projects', 'Create a project to get started.')}</li>`;
+        ? `<table class="table">
+            <caption class="sr-only">Active projects by deadline</caption>
+            <thead><tr><th scope="col">Project</th><th scope="col" class="hide-sm">Status</th><th scope="col">Progress</th><th scope="col" class="num">Deadline</th></tr></thead>
+            <tbody>${projects
+              .map(
+                (p) => `<tr>
+                  <td><div class="cell-main">${projectGlyph(p)}<a class="cell-name truncate" href="projects.html?q=${encodeURIComponent(p.name)}">${esc(p.name)}</a></div></td>
+                  <td class="hide-sm">${badge(PROJECT_STATUS[p.status], true)}</td>
+                  <td><div class="cell-progress">${progressBar(p.progress, `${p.name} progress`)}<span class="num">${p.progress}%</span></div></td>
+                  <td class="num mono-cell"><span class="due ${dueState(p.due, false)}">${fmtDate(p.due)}</span></td>
+                </tr>`
+              )
+              .join('')}</tbody>
+          </table>`
+        : emptyState('folder', 'No active projects', 'Create a project to get started.');
 
       const upcoming = open.slice().sort((a, b) => a.due.localeCompare(b.due)).slice(0, 5);
       $('#upcoming-deadlines').innerHTML = upcoming.length
@@ -1597,7 +1573,7 @@
               const a = memberById(t.assignee);
               const state = dueState(t.due, false);
               return `<li class="deadline">
-                <span class="date-chip ${state}" aria-hidden="true"><span class="m">${fmtDate(t.due, { month: 'short' })}</span><span class="d">${parseISO(t.due).getDate()}</span></span>
+                <span class="date-chip ${state}" aria-hidden="true"><span class="d">${String(parseISO(t.due).getDate()).padStart(2, '0')}</span><span class="m">${fmtDate(t.due, { month: 'short' })}</span></span>
                 <div class="min0 grow">
                   <button type="button" class="item-title truncate" data-action="task-edit" data-id="${t.id}" title="Edit “${esc(t.title)}”">${esc(t.title)}</button>
                   <p class="item-meta truncate">${esc(projectById(t.project)?.name || 'No project')} · <span class="due ${state}">${relDue(t.due)}</span></p>
@@ -1657,6 +1633,7 @@
     const state = { status: 'all', priority: 'all', sort: 'due', q: params.get('q') || '' };
     const grid = $('#project-grid');
     const search = $('#project-search');
+    let highlightId = null;
     search.value = state.q;
 
     const card = (p) => {
@@ -1668,36 +1645,30 @@
         .filter(([key]) => key !== p.status)
         .map(([key, cfg]) => `<button type="button" class="menu-item" data-action="project-status" data-id="${p.id}" data-status="${key}">${icon(key === 'completed' ? 'check-circle' : 'flag', 'icon-sm')}Mark as ${cfg.label.toLowerCase()}</button>`)
         .join('');
-      return `<article class="card project-card" aria-labelledby="pn-${p.id}">
-        <header class="project-card-head">
+      const owner = ownerOf(p);
+      return `<li class="proj-row${p.id === highlightId ? ' is-new' : ''}" data-id="${p.id}">
+        <div class="p-main">
           ${projectGlyph(p)}
-          <div class="min0 grow">
-            <h2 class="project-name truncate" id="pn-${p.id}">${esc(p.name)}</h2>
-            <p class="text-xs subtle">${plural(tasks.length, 'task')} · ${openTasks} open</p>
-          </div>
-          <div class="dropdown" data-dropdown>
-            <button type="button" class="btn-icon sm" data-dropdown-trigger aria-expanded="false" aria-controls="pm-${p.id}" aria-label="Actions for ${esc(p.name)}">${icon('more')}</button>
-            <div class="dropdown-menu" id="pm-${p.id}" data-dropdown-menu hidden>
-              <button type="button" class="menu-item" data-action="project-edit" data-id="${p.id}">${icon('edit', 'icon-sm')}Edit project</button>
-              <div class="menu-sep"></div>
-              ${statusItems}
-              <a class="menu-item" href="tasks.html?q=${encodeURIComponent(p.name)}">${icon('check-square', 'icon-sm')}View tasks</a>
-              <div class="menu-sep"></div>
-              <button type="button" class="menu-item danger" data-action="project-delete" data-id="${p.id}">${icon('trash', 'icon-sm')}Delete project</button>
-            </div>
-          </div>
-        </header>
-        <p class="project-desc">${esc(p.description || 'No description yet.')}</p>
-        <div class="row wrap tight">${badge(PROJECT_STATUS[p.status], true)}${priorityBadge(p.priority)}</div>
-        <div class="project-progress">
-          <div class="row"><span class="muted">Progress</span><strong>${p.progress}%</strong></div>
-          ${progressBar(p.progress, `${p.name} progress`)}
+          <button type="button" class="p-name truncate" id="pn-${p.id}" data-action="project-edit" data-id="${p.id}" title="Edit “${esc(p.name)}”">${esc(p.name)}</button>
+          <div class="p-sub"><span class="truncate">${plural(tasks.length, 'task')} · ${openTasks} open</span>${priorityBadge(p.priority)}</div>
         </div>
-        <footer class="project-card-foot">
-          ${avatarStack(p.members)}
-          <span class="due ${dueCls}">${icon('calendar', 'icon-sm')}<span><span class="sr-only">Due date: </span>${done ? 'Done' : 'Due'} ${fmtDate(p.due)}</span></span>
-        </footer>
-      </article>`;
+        <div class="p-status"><span class="cell-label">Status</span>${badge(PROJECT_STATUS[p.status], true)}</div>
+        <div class="p-progress"><span class="cell-label">Progress</span><div class="progress-line">${progressBar(p.progress, `${p.name} progress`)}<span class="num">${p.progress}%</span></div></div>
+        <div class="p-owner"><span class="cell-label">Owner</span><div class="owner-line">${avatar(owner, 'avatar-sm')}<span class="name truncate">${esc(owner.name)}</span></div></div>
+        <div class="p-due"><span class="cell-label">Deadline</span><span class="due ${dueCls}"><span class="sr-only">Deadline: </span>${fmtDate(p.due, { month: 'short', day: 'numeric', year: 'numeric' })}</span><span class="item-meta">${done ? 'Completed' : daysUntil(p.due) >= 7 ? `In ${daysUntil(p.due)} days` : relDue(p.due)}</span></div>
+        <div class="p-team"><span class="cell-label">Team</span>${avatarStack(p.members)}</div>
+        <div class="p-actions dropdown" data-dropdown>
+          <button type="button" class="btn-icon sm" data-dropdown-trigger aria-expanded="false" aria-controls="pm-${p.id}" aria-label="Actions for ${esc(p.name)}">${icon('more')}</button>
+          <div class="dropdown-menu" id="pm-${p.id}" data-dropdown-menu hidden>
+            <button type="button" class="menu-item" data-action="project-edit" data-id="${p.id}">${icon('edit', 'icon-sm')}Edit project</button>
+            <div class="menu-sep"></div>
+            ${statusItems}
+            <a class="menu-item" href="tasks.html?q=${encodeURIComponent(p.name)}">${icon('check-square', 'icon-sm')}View tasks</a>
+            <div class="menu-sep"></div>
+            <button type="button" class="menu-item danger" data-action="project-delete" data-id="${p.id}">${icon('trash', 'icon-sm')}Delete project</button>
+          </div>
+        </div>
+      </li>`;
     };
 
     const render = () => {
@@ -1722,8 +1693,11 @@
 
       grid.innerHTML = list.length
         ? list.map(card).join('')
-        : `<div class="card grid-empty">${emptyState('folder', 'No projects found', 'Try a different search or filter, or create a new project.', `${clearFiltersBtn}<button type="button" class="btn btn-primary btn-sm" data-open-modal="project-modal">Add project</button>`)}</div>`;
-      $('#project-count').textContent = `Showing ${list.length} of ${plural(d.projects.length, 'project')}`;
+        : `<li class="list-empty">${emptyState('folder', 'No projects found', 'Try a different search or filter, or create a new project.', `${clearFiltersBtn}<button type="button" class="btn btn-primary btn-sm" data-open-modal="project-modal">Add project</button>`)}</li>`;
+      const overdue = d.projects.filter((p) => p.status !== 'completed' && daysUntil(p.due) < 0).length;
+      $('#project-count').textContent = `${plural(d.projects.length, 'project')} · ${counts.active || 0} active${overdue ? ` · ${overdue} past deadline` : ''}`;
+      $('#project-result-count').textContent = `Showing ${list.length} of ${d.projects.length}`;
+      highlightId = null;
     };
 
     initPressedGroup($('#project-filters'), (btn) => {
@@ -1791,10 +1765,16 @@
       membersBox.innerHTML = d.members
         .map((m) => `<label class="check-item"><input type="checkbox" class="checkbox" name="members" value="${m.id}"${p?.members.includes(m.id) ? ' checked' : ''}>${avatar(m, 'avatar-xs')}<span class="truncate">${esc(m.name)}</span></label>`)
         .join('');
+      field('owner').innerHTML = `<option value="me">${esc(me().name)} (you)</option>${d.members
+        .map((m) => `<option value="${m.id}">${esc(m.name)}</option>`)
+        .join('')}`;
       if (!p) {
+        field('owner').value = 'me';
         field('due').value = isoIn(30);
         return;
       }
+      field('owner').value = ownerOf(p).id;
+      if (field('owner').selectedIndex < 0) field('owner').value = 'me';
       field('name').value = p.name;
       field('description').value = p.description || '';
       field('status').value = p.status;
@@ -1814,6 +1794,12 @@
       if (validateForm(form)) submitWithBusy(form, form.dataset.editId ? updateProject : createProject);
     });
 
+    const selectedMembers = () => {
+      const ids = $$('input[name="members"]:checked', form).map((i) => i.value);
+      const owner = formVal(form, 'owner');
+      return owner !== 'me' && !ids.includes(owner) ? [owner, ...ids] : ids;
+    };
+
     const updateProject = () => {
       const p = projectById(form.dataset.editId);
       if (!p) return dlg.close();
@@ -1823,8 +1809,9 @@
         status: formVal(form, 'status'),
         priority: formVal(form, 'priority'),
         progress: Number(formVal(form, 'progress')),
+        owner: formVal(form, 'owner'),
         due: formVal(form, 'due'),
-        members: $$('input[name="members"]:checked', form).map((i) => i.value),
+        members: selectedMembers(),
       });
       if (p.status === 'completed') p.progress = 100;
       logActivity('updated the project', p.name);
@@ -1841,10 +1828,12 @@
         status: formVal(form, 'status'),
         priority: formVal(form, 'priority'),
         progress: 0,
+        owner: formVal(form, 'owner'),
         due: formVal(form, 'due'),
-        members: $$('input[name="members"]:checked', form).map((i) => i.value),
+        members: selectedMembers(),
         hue: Math.floor(Math.random() * 360),
       };
+      highlightId = project.id;
       d.projects.unshift(project);
       logActivity('created the project', project.name);
       pushNotification('success', 'Project created', `${project.name} is ready. Invite your team and add tasks.`);
@@ -1889,14 +1878,15 @@
         </div>
         <div class="t-meta">
           <div class="t-status">
+            <span class="cell-label" aria-hidden="true">Status</span>
             <label class="sr-only" for="st-${t.id}">Status of “${esc(t.title)}”</label>
             <select class="select status-select" id="st-${t.id}">${Object.entries(TASK_STATUS)
               .map(([key, cfg]) => `<option value="${key}"${key === t.status ? ' selected' : ''}>${cfg.label}</option>`)
               .join('')}</select>
           </div>
-          <div class="t-priority">${priorityBadge(t.priority)}</div>
-          <div class="t-assignee assignee">${avatar(a, 'avatar-xs')}<span class="name truncate"><span class="sr-only">Assigned to </span>${esc(t.assignee === 'me' ? `${a.name} (you)` : a.name)}</span></div>
-          <div class="t-due"><span class="due ${dueState(t.due, done)}">${icon('calendar', 'icon-xs')}<span><span class="sr-only">Due </span>${relDue(t.due)}</span></span></div>
+          <div class="t-priority"><span class="cell-label" aria-hidden="true">Priority</span>${priorityBadge(t.priority)}</div>
+          <div class="t-assignee"><span class="cell-label" aria-hidden="true">Assignee</span><span class="assignee">${avatar(a, 'avatar-xs')}<span class="name truncate"><span class="sr-only">Assigned to </span>${esc(t.assignee === 'me' ? `${a.name} (you)` : a.name)}</span></span></div>
+          <div class="t-due"><span class="cell-label" aria-hidden="true">Due</span><span class="due ${dueState(t.due, done)}" title="${fmtDate(t.due, { weekday: 'short', month: 'short', day: 'numeric' })}"><span class="sr-only">Due </span>${done ? fmtDate(t.due) : relDue(t.due)}</span></div>
         </div>
         <div class="t-actions dropdown" data-dropdown>
           <button type="button" class="btn-icon sm" id="ta-${t.id}" data-dropdown-trigger aria-expanded="false" aria-controls="tm-${t.id}" aria-label="Actions for “${esc(t.title)}”">${icon('more')}</button>
@@ -1932,8 +1922,8 @@
       list.innerHTML = items.length
         ? items.map(row).join('')
         : d.tasks.length
-          ? `<li>${emptyState('check-square', 'No tasks match your filters', 'Try adjusting the search or filters, or create a new task.', `${clearFiltersBtn}<button type="button" class="btn btn-primary btn-sm" data-open-modal="task-modal">New task</button>`)}</li>`
-          : `<li>${emptyState('check-circle', 'You’re all caught up', 'There are no tasks yet. Create one to start tracking work.', '<button type="button" class="btn btn-primary btn-sm" data-open-modal="task-modal">New task</button>')}</li>`;
+          ? `<li class="list-empty">${emptyState('check-square', 'No tasks match your filters', 'Try adjusting the search or filters, or create a new task.', `${clearFiltersBtn}<button type="button" class="btn btn-primary btn-sm" data-open-modal="task-modal">New task</button>`)}</li>`
+          : `<li class="list-empty">${emptyState('check-circle', 'You’re all caught up', 'There are no tasks yet. Create one to start tracking work.', '<button type="button" class="btn btn-primary btn-sm" data-open-modal="task-modal">New task</button>')}</li>`;
       $('#task-result-count').textContent = `Showing ${items.length} of ${plural(d.tasks.length, 'task')}`;
       highlightId = null;
       if (focusedId) document.getElementById(focusedId)?.focus();
@@ -2053,7 +2043,7 @@
   // Team ------------------------------------------------------------------
   PAGES.team = () => {
     const d = store.data;
-    const state = { q: params.get('q') || '', department: 'all', status: 'all', view: d.prefs.teamView === 'table' ? 'table' : 'cards' };
+    const state = { q: params.get('q') || '', department: 'all', status: 'all', view: d.prefs.teamView === 'cards' ? 'cards' : 'table' };
     const grid = $('#member-grid');
     const search = $('#member-search');
     const deptSel = $('#member-department');
@@ -2086,7 +2076,7 @@
       </tr>`;
     };
 
-    const table = (items) => `<div class="card card-flush"><table class="table member-table">
+    const table = (items) => `<div class="table-wrap"><table class="table member-table">
       <caption class="sr-only">Team members</caption>
       <thead><tr><th scope="col">Member</th><th scope="col" class="hide-sm">Role</th><th scope="col" class="hide-md">Department</th><th scope="col">Status</th><th scope="col" class="num hide-sm">Projects</th><th scope="col" class="num">Completed</th><th scope="col" class="num"><span class="sr-only">Actions</span></th></tr></thead>
       <tbody>${items.map(tableRow).join('')}</tbody>
@@ -2094,7 +2084,7 @@
 
     const card = (m) => {
       const st = MEMBER_STATUS[m.status] || MEMBER_STATUS.offline;
-      return `<article class="card member-card" aria-labelledby="mn-${m.id}">
+      return `<article class="member-card" aria-labelledby="mn-${m.id}">
         ${memberMenu(m, 'card-menu')}
         <span class="avatar avatar-lg" style="--hue:${Number(m.hue) || 220}" aria-hidden="true">${esc(initials(m.name))}<span class="status-dot" data-tone="${st.tone}"></span></span>
         <h2 class="member-name" id="mn-${m.id}">${esc(m.name)}</h2>
@@ -2132,9 +2122,9 @@
         .filter((m) => !q || `${m.name} ${m.role} ${m.email}`.toLowerCase().includes(q));
 
       const asTable = state.view === 'table' && !narrow.matches;
-      grid.classList.toggle('is-table', asTable && items.length > 0);
+      grid.classList.toggle('is-table', asTable || !items.length);
       grid.innerHTML = !items.length
-        ? `<div class="card grid-empty">${emptyState('users', 'No team members found', 'Try another search or filter, or invite someone new.', `${clearFiltersBtn}<button type="button" class="btn btn-primary btn-sm" data-open-modal="member-modal">Invite member</button>`)}</div>`
+        ? `<div class="grid-empty">${emptyState('users', 'No team members found', 'Try another search or filter, or invite someone new.', `${clearFiltersBtn}<button type="button" class="btn btn-primary btn-sm" data-open-modal="member-modal">Invite member</button>`)}</div>`
         : asTable
           ? table(items)
           : items.map(card).join('');
@@ -2195,7 +2185,10 @@
       });
       if (!ok) return;
       d.members = d.members.filter((x) => x.id !== m.id);
-      d.projects.forEach((p) => (p.members = p.members.filter((id) => id !== m.id)));
+      d.projects.forEach((p) => {
+        p.members = p.members.filter((id) => id !== m.id);
+        if (p.owner === m.id) p.owner = p.members[0] || 'me';
+      });
       d.tasks.forEach((t) => {
         if (t.assignee === m.id) t.assignee = 'me';
       });
@@ -2320,9 +2313,9 @@
         completed: `rgb(${cssVar('--success-rgb')})`,
       };
       const completedCount = d.projects.filter((p) => p.status === 'completed').length;
-      donutChart($('#completion-donut'), {
+      compositionChart($('#completion-donut'), {
         centerValue: `${d.projects.length ? Math.round((completedCount / d.projects.length) * 100) : 0}%`,
-        centerLabel: 'completed',
+        centerLabel: 'of projects completed',
         segments: Object.entries(PROJECT_STATUS).map(([key, cfg]) => ({
           label: cfg.label,
           value: d.projects.filter((p) => p.status === key).length,
@@ -2381,18 +2374,18 @@
           const tasks = tasksFor(p.id);
           const done = tasks.filter((t) => t.status === 'done').length;
           return `<tr>
-            <td><div class="cell-main">${projectGlyph(p)}<a class="item-title truncate" href="projects.html?q=${encodeURIComponent(p.name)}">${esc(p.name)}</a></div></td>
+            <td><div class="cell-main">${projectGlyph(p)}<a class="cell-name truncate" href="projects.html?q=${encodeURIComponent(p.name)}">${esc(p.name)}</a></div></td>
             <td class="hide-sm">${badge(PROJECT_STATUS[p.status], true)}</td>
             <td class="num hide-sm">${done} / ${tasks.length}</td>
-            <td><div class="cell-progress">${progressBar(p.progress, `${p.name} progress`)}<span class="num text-xs muted">${p.progress}%</span></div></td>
-            <td class="hide-md"><span class="due ${dueState(p.due, p.status === 'completed')}">${fmtDate(p.due)}</span></td>
+            <td><div class="cell-progress">${progressBar(p.progress, `${p.name} progress`)}<span class="num">${p.progress}%</span></div></td>
+            <td class="hide-md num mono-cell"><span class="due ${dueState(p.due, p.status === 'completed')}">${fmtDate(p.due)}</span></td>
           </tr>`;
         })
         .join('');
       $('#project-progress').innerHTML = rows
         ? `<table class="table">
             <caption class="sr-only">Progress by project</caption>
-            <thead><tr><th scope="col">Project</th><th scope="col" class="hide-sm">Status</th><th scope="col" class="num hide-sm">Tasks done</th><th scope="col">Progress</th><th scope="col" class="hide-md">Due</th></tr></thead>
+            <thead><tr><th scope="col">Project</th><th scope="col" class="hide-sm">Status</th><th scope="col" class="num hide-sm">Tasks done</th><th scope="col">Progress</th><th scope="col" class="num hide-md">Deadline</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>`
         : emptyState('folder', 'No projects yet', 'Create a project to track its progress here.');
@@ -2509,9 +2502,11 @@
 
     // Appearance
     const ap = readAppearance();
-    $$('input[name="accent"]').forEach((r) => (r.checked = r.value === (ap.accent || 'blue')));
+    const accents = $$('input[name="accent"]').map((r) => r.value);
+    const accent = accents.includes(ap.accent) ? ap.accent : 'forest';
+    $$('input[name="accent"]').forEach((r) => (r.checked = r.value === accent));
     $$('input[name="density"]').forEach((r) => (r.checked = r.value === (ap.density || 'comfortable')));
-    $('#a-transparency').checked = ap.transparency === 'reduced';
+    $('#a-contrast').checked = ap.contrast === 'more';
     $('#a-motion').checked = ap.motion === 'reduced';
 
     const updateAppearance = (key, value, message) => {
@@ -2522,7 +2517,7 @@
       toast(message);
     };
     $$('input[name="accent"]').forEach((r) =>
-      r.addEventListener('change', () => updateAppearance('accent', r.value === 'blue' ? '' : r.value, `Accent color set to ${r.value}.`))
+      r.addEventListener('change', () => updateAppearance('accent', r.value === 'forest' ? '' : r.value, `Accent color set to ${r.value}.`))
     );
     $$('input[name="density"]').forEach((r) =>
       r.addEventListener('change', () => updateAppearance('density', r.value === 'compact' ? 'compact' : '', `${r.value === 'compact' ? 'Compact' : 'Comfortable'} layout enabled.`))
@@ -2530,7 +2525,8 @@
     $$('[data-appearance]').forEach((sw) =>
       sw.addEventListener('change', () => {
         const key = sw.dataset.appearance;
-        updateAppearance(key, sw.checked ? 'reduced' : '', `${key === 'motion' ? 'Reduced motion' : 'Reduced transparency'} ${sw.checked ? 'on' : 'off'}.`);
+        const on = key === 'contrast' ? 'more' : 'reduced';
+        updateAppearance(key, sw.checked ? on : '', `${key === 'contrast' ? 'Higher contrast' : 'Reduced motion'} ${sw.checked ? 'on' : 'off'}.`);
       })
     );
 
