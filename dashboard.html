@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · NEXORA</title>
+  <meta name="description" content="Your NEXORA workspace overview: projects, tasks, deadlines and team activity.">
+  <meta name="theme-color" content="#060913">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
+</head>
+<body data-page="dashboard">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" data-shell="sidebar" aria-label="Sidebar"></aside>
+    <div class="scrim" data-action="close-nav" hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-shell="topbar"></header>
+
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow welcome-date"><span data-icon="calendar" data-icon-class="icon-sm"></span><span data-today>Today</span></p>
+            <h1 class="page-title" data-greeting>Welcome back</h1>
+            <p class="page-sub" data-summary>Here is what is happening across your workspace today.</p>
+          </div>
+          <div class="page-actions">
+            <a href="projects.html" class="btn btn-secondary"><span data-icon="folder" data-icon-class="icon-sm"></span>View projects</a>
+            <button type="button" class="btn btn-primary" data-open-modal="task-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>New task</button>
+          </div>
+        </div>
+
+        <section class="stats-grid" aria-label="Workspace summary">
+          <article class="card stat">
+            <div class="stat-top">
+              <h2 class="stat-label">Total projects</h2>
+              <span class="icon-tile" data-tone="accent"><span data-icon="folder"></span></span>
+            </div>
+            <p class="stat-value" data-stat="projects">0</p>
+            <p class="stat-foot"><span class="trend up"><span data-icon="trending-up" data-icon-class="icon-xs"></span>+2</span>new this month</p>
+          </article>
+          <article class="card stat">
+            <div class="stat-top">
+              <h2 class="stat-label">Active tasks</h2>
+              <span class="icon-tile" data-tone="violet"><span data-icon="check-square"></span></span>
+            </div>
+            <p class="stat-value" data-stat="active">0</p>
+            <p class="stat-foot"><span data-stat="overdue">0 overdue</span></p>
+          </article>
+          <article class="card stat">
+            <div class="stat-top">
+              <h2 class="stat-label">Completed tasks</h2>
+              <span class="icon-tile" data-tone="success"><span data-icon="check-circle"></span></span>
+            </div>
+            <p class="stat-value" data-stat="completed">0</p>
+            <p class="stat-foot"><span class="trend up"><span data-icon="trending-up" data-icon-class="icon-xs"></span>+18%</span>vs last month</p>
+          </article>
+          <article class="card stat">
+            <div class="stat-top">
+              <h2 class="stat-label">Team members</h2>
+              <span class="icon-tile" data-tone="info"><span data-icon="users"></span></span>
+            </div>
+            <p class="stat-value" data-stat="members">0</p>
+            <p class="stat-foot"><span data-stat="online">0 online now</span></p>
+          </article>
+        </section>
+
+        <div class="dash-grid">
+          <section class="card" aria-labelledby="productivity-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="productivity-title">Productivity</h2>
+                <p class="card-sub">Tasks created vs. completed</p>
+              </div>
+              <div class="segmented" role="group" aria-label="Chart range" data-chart-range>
+                <button type="button" aria-pressed="true" data-range="7d">7D</button>
+                <button type="button" aria-pressed="false" data-range="30d">30D</button>
+                <button type="button" aria-pressed="false" data-range="12m">12M</button>
+              </div>
+            </div>
+            <div class="chart-meta">
+              <p class="chart-summary" data-chart-summary aria-live="polite"><strong>—</strong><span>tasks completed</span></p>
+              <div class="legend" aria-hidden="true">
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent)"></span>Completed</span>
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent-2)"></span>Created</span>
+              </div>
+            </div>
+            <div class="chart" id="productivity-chart" style="--chart-h: 280px"><div class="skeleton sk-chart"></div></div>
+          </section>
+
+          <section class="card" aria-labelledby="deadlines-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="deadlines-title">Upcoming deadlines</h2>
+                <p class="card-sub">Open tasks, soonest first</p>
+              </div>
+              <a class="card-link" href="tasks.html">All tasks <span data-icon="chevron-right" data-icon-class="icon-sm"></span></a>
+            </div>
+            <ul class="list" id="upcoming-deadlines">
+              <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span><span class="skeleton sk-line w-40"></span></span></li>
+              <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span><span class="skeleton sk-line w-40"></span></span></li>
+              <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span><span class="skeleton sk-line w-40"></span></span></li>
+            </ul>
+          </section>
+        </div>
+
+        <div class="dash-grid">
+          <section class="card" aria-labelledby="recent-projects-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="recent-projects-title">Recent projects</h2>
+                <p class="card-sub">Active work across the team</p>
+              </div>
+              <a class="card-link" href="projects.html">All projects <span data-icon="chevron-right" data-icon-class="icon-sm"></span></a>
+            </div>
+            <ul class="list" id="recent-projects">
+              <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span><span class="skeleton sk-line w-40"></span></span></li>
+              <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span><span class="skeleton sk-line w-40"></span></span></li>
+              <li class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span><span class="skeleton sk-line w-40"></span></span></li>
+            </ul>
+          </section>
+
+          <section class="card" aria-labelledby="activity-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="activity-title">Recent activity</h2>
+                <p class="card-sub">Latest updates from your team</p>
+              </div>
+            </div>
+            <ol class="activity" id="activity-feed">
+              <li class="sk-row"><span class="skeleton sk-circle"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span><span class="skeleton sk-line w-40"></span></span></li>
+              <li class="sk-row"><span class="skeleton sk-circle"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span><span class="skeleton sk-line w-40"></span></span></li>
+              <li class="sk-row"><span class="skeleton sk-circle"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span><span class="skeleton sk-line w-40"></span></span></li>
+            </ol>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="modal" id="task-modal" aria-labelledby="task-modal-title">
+    <form class="modal-form" id="task-form" novalidate>
+      <div class="modal-head">
+        <span class="modal-icon" data-icon="check-square" aria-hidden="true"></span>
+        <div>
+          <h2 class="modal-title" id="task-modal-title" data-edit-text="Edit task">Create task</h2>
+          <p class="modal-sub" data-edit-text="Update the details, owner or status of this task.">Add a task and assign it to a teammate.</p>
+        </div>
+        <button type="button" class="btn-icon sm" data-close-modal aria-label="Close dialog"><span data-icon="x"></span></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field span-2">
+            <label class="label" for="task-title">Task title</label>
+            <input class="input" id="task-title" name="title" type="text" required minlength="3" maxlength="90" placeholder="e.g. Prepare sprint review deck" autofocus>
+          </div>
+          <div class="field">
+            <label class="label" for="task-project">Project</label>
+            <select class="select" id="task-project" name="project" required data-options="projects"></select>
+          </div>
+          <div class="field">
+            <label class="label" for="task-assignee">Assignee</label>
+            <select class="select" id="task-assignee" name="assignee" required data-options="members"></select>
+          </div>
+          <div class="field">
+            <label class="label" for="task-priority">Priority</label>
+            <select class="select" id="task-priority" name="priority">
+              <option value="high">High</option>
+              <option value="medium" selected>Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="label" for="task-due">Due date</label>
+            <input class="input" id="task-due" name="due" type="date" required data-future-date>
+          </div>
+          <div class="field span-2" data-edit-only hidden>
+            <label class="label" for="task-status">Status</label>
+            <select class="select" id="task-status" name="status">
+              <option value="todo">To do</option>
+              <option value="in-progress">In progress</option>
+              <option value="review">In review</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary" data-edit-text="Save changes">Create task</button>
+      </div>
+    </form>
+  </dialog>
+
+  <noscript><div class="noscript">NEXORA needs JavaScript enabled to load your workspace.</div></noscript>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

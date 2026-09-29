@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analytics · NEXORA</title>
+  <meta name="description" content="Productivity analytics for your NEXORA workspace: throughput, project completion and team performance.">
+  <meta name="theme-color" content="#060913">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
+</head>
+<body data-page="analytics">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" data-shell="sidebar" aria-label="Sidebar"></aside>
+    <div class="scrim" data-action="close-nav" hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-shell="topbar"></header>
+
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Insights</p>
+            <h1 class="page-title">Analytics</h1>
+            <p class="page-sub">Understand throughput, delivery and team performance over time.</p>
+          </div>
+          <div class="page-actions">
+            <div class="segmented" role="group" aria-label="Reporting period" id="analytics-range">
+              <button type="button" aria-pressed="false" data-range="7d">7 days</button>
+              <button type="button" aria-pressed="true" data-range="30d">30 days</button>
+              <button type="button" aria-pressed="false" data-range="90d">90 days</button>
+            </div>
+            <button type="button" class="btn btn-secondary" data-action="export-report"><span data-icon="download" data-icon-class="icon-sm"></span>Export</button>
+          </div>
+        </div>
+
+        <section class="kpi-grid" aria-label="Key metrics">
+          <article class="card stat">
+            <div class="stat-top"><h2 class="stat-label">Tasks completed</h2><span class="icon-tile" data-tone="success"><span data-icon="check-circle"></span></span></div>
+            <p class="stat-value" data-kpi="completed">0</p>
+            <p class="stat-foot"><span class="trend up" data-kpi-trend="completed">+0%</span>vs previous period</p>
+          </article>
+          <article class="card stat">
+            <div class="stat-top"><h2 class="stat-label">Avg. project progress</h2><span class="icon-tile" data-tone="accent"><span data-icon="target"></span></span></div>
+            <p class="stat-value" data-kpi="completion">0%</p>
+            <p class="stat-foot">Average progress across all projects</p>
+          </article>
+          <article class="card stat">
+            <div class="stat-top"><h2 class="stat-label">Team productivity</h2><span class="icon-tile" data-tone="violet"><span data-icon="zap"></span></span></div>
+            <p class="stat-value" data-kpi="productivity">0%</p>
+            <p class="stat-foot">Tasks completed vs. created</p>
+          </article>
+          <article class="card stat">
+            <div class="stat-top"><h2 class="stat-label">Avg. cycle time</h2><span class="icon-tile" data-tone="warning"><span data-icon="clock"></span></span></div>
+            <p class="stat-value" data-kpi="cycle">0d</p>
+            <p class="stat-foot"><span class="trend up" data-kpi-trend="cycle">0%</span>faster than before</p>
+          </article>
+        </section>
+
+        <div class="analytics-main">
+          <section class="card" aria-labelledby="trend-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="trend-title">Tasks completed</h2>
+                <p class="card-sub" data-range-label>Last 30 days</p>
+              </div>
+              <div class="legend" aria-hidden="true">
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent)"></span>Completed</span>
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent-2)"></span>Created</span>
+              </div>
+            </div>
+            <div class="chart" id="trend-chart" style="--chart-h: 280px"><div class="skeleton sk-chart"></div></div>
+          </section>
+
+          <section class="card" aria-labelledby="completion-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="completion-title">Project completion</h2>
+                <p class="card-sub">Share of projects finished, by status</p>
+              </div>
+            </div>
+            <div class="donut-wrap" id="completion-donut"></div>
+          </section>
+        </div>
+
+        <div class="grid-2">
+          <section class="card" aria-labelledby="weekly-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="weekly-title">Weekly activity</h2>
+                <p class="card-sub">Tasks created and completed this week</p>
+              </div>
+              <div class="legend" aria-hidden="true">
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent)"></span>Completed</span>
+                <span class="legend-item"><span class="legend-dot" style="--c: var(--accent-2)"></span>Created</span>
+              </div>
+            </div>
+            <div class="chart" id="weekly-chart" style="--chart-h: 240px"><div class="skeleton sk-chart"></div></div>
+          </section>
+
+          <section class="card" aria-labelledby="team-productivity-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="team-productivity-title">Team productivity</h2>
+                <p class="card-sub">Tasks completed per member</p>
+              </div>
+              <a class="card-link" href="team.html">View team <span data-icon="chevron-right" data-icon-class="icon-sm"></span></a>
+            </div>
+            <ul class="hbar-list" id="team-bars">
+              <li class="sk-row"><span class="skeleton sk-circle"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span></span></li>
+              <li class="sk-row"><span class="skeleton sk-circle"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span></span></li>
+              <li class="sk-row"><span class="skeleton sk-circle"></span><span class="sk-lines"><span class="skeleton sk-line w-40"></span></span></li>
+            </ul>
+          </section>
+        </div>
+
+        <div class="grid-2">
+          <section class="card" aria-labelledby="monthly-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="monthly-title">Monthly activity</h2>
+                <p class="card-sub">Tasks completed over the last 12 months</p>
+              </div>
+            </div>
+            <div class="chart" id="monthly-chart" style="--chart-h: 240px"><div class="skeleton sk-chart"></div></div>
+          </section>
+
+          <section class="card" aria-labelledby="heatmap-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="heatmap-title">Activity heatmap</h2>
+                <p class="card-sub">Daily updates over the last 20 weeks</p>
+              </div>
+            </div>
+            <div class="heatmap-wrap">
+              <div class="heatmap" id="heatmap" role="img" aria-label="Daily activity heatmap for the last 20 weeks"></div>
+            </div>
+            <div class="heat-legend" aria-hidden="true">
+              Less
+              <span class="heat-cell" style="--l:0"></span>
+              <span class="heat-cell" style="--l:1"></span>
+              <span class="heat-cell" style="--l:2"></span>
+              <span class="heat-cell" style="--l:3"></span>
+              <span class="heat-cell" style="--l:4"></span>
+              More
+            </div>
+          </section>
+        </div>
+
+        <section class="card card-flush" aria-labelledby="progress-title">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title" id="progress-title">Project breakdown</h2>
+              <p class="card-sub">Status, task completion and progress by project</p>
+            </div>
+            <a class="card-link" href="projects.html">All projects <span data-icon="chevron-right" data-icon-class="icon-sm"></span></a>
+          </div>
+          <div class="table-wrap" id="project-progress">
+            <div class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-60"></span><span class="skeleton sk-line w-40"></span></span></div>
+            <div class="sk-row"><span class="skeleton sk-square"></span><span class="sk-lines"><span class="skeleton sk-line w-80"></span><span class="skeleton sk-line w-40"></span></span></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <noscript><div class="noscript">NEXORA needs JavaScript enabled to load your workspace.</div></noscript>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

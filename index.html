@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEXORA — Project & task management for high-performing teams</title>
+  <meta name="description" content="NEXORA helps teams organize projects, tasks, deadlines and productivity in one calm, fast workspace.">
+  <meta name="theme-color" content="#060913">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
+</head>
+<body class="landing" data-page="landing">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="NEXORA home">
+        <img src="assets/logo.svg" alt="" width="32" height="32">
+        <span>NEXORA</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#preview">Product</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#testimonials">Customers</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="dashboard.html" class="btn btn-ghost">Sign in</a>
+        <a href="dashboard.html" class="btn btn-primary">Get started</a>
+        <button class="btn-icon menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-action="toggle-site-menu">
+          <span data-icon="menu"></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#preview">Product</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#testimonials">Customers</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <a href="dashboard.html" class="btn btn-secondary">Sign in</a>
+      <a href="dashboard.html" class="btn btn-primary">Get started free</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <a href="#features" class="hero-badge">
+          <span class="tag">New</span>
+          AI-assisted sprint planning is here
+          <span data-icon="arrow-right" data-icon-class="icon-sm"></span>
+        </a>
+        <h1 class="hero-title" id="hero-title">Where teams turn plans into <span class="gradient-text">shipped work</span></h1>
+        <p class="hero-sub">NEXORA brings projects, tasks, deadlines and team productivity into one calm, fast workspace — so everyone knows what matters today.</p>
+        <div class="hero-actions">
+          <a href="dashboard.html" class="btn btn-primary btn-lg">
+            Open the dashboard
+            <span data-icon="arrow-right" data-icon-class="icon-sm"></span>
+          </a>
+          <a href="#preview" class="btn btn-secondary btn-lg">See it in action</a>
+        </div>
+        <p class="hero-note">Free for teams up to 5 · No credit card required</p>
+
+        <ul class="hero-stats" aria-label="NEXORA in numbers">
+          <li class="hero-stat"><strong>12k+</strong><span>Teams onboarded</span></li>
+          <li class="hero-stat"><strong>38%</strong><span>Faster delivery</span></li>
+          <li class="hero-stat"><strong>4.9/5</strong><span>Average rating</span></li>
+          <li class="hero-stat"><strong>99.99%</strong><span>Uptime SLA</span></li>
+        </ul>
+
+        <div class="logos">
+          <p>Trusted by product teams at</p>
+          <div class="logo-row" aria-label="Customer logos">
+            <span>Northwind</span>
+            <span>Lumen</span>
+            <span>Vertex&nbsp;Labs</span>
+            <span>Orbitly</span>
+            <span>Helix</span>
+            <span>Quanta</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Features</span>
+          <h2 class="section-title" id="features-title">Everything your team needs to deliver on time</h2>
+          <p class="section-sub">Replace scattered docs, spreadsheets and status meetings with a single source of truth.</p>
+        </div>
+        <div class="features-grid">
+          <article class="card feature-card">
+            <span class="icon-tile" data-tone="accent"><span data-icon="folder" data-icon-class="icon-lg"></span></span>
+            <h3>Project workspaces</h3>
+            <p>Group work by project with owners, priorities, milestones and a live progress score everyone can trust.</p>
+          </article>
+          <article class="card feature-card">
+            <span class="icon-tile" data-tone="violet"><span data-icon="check-square" data-icon-class="icon-lg"></span></span>
+            <h3>Smart task management</h3>
+            <p>Assign, prioritize and track tasks with filters, statuses and due-date reminders that keep work moving.</p>
+          </article>
+          <article class="card feature-card">
+            <span class="icon-tile" data-tone="warning"><span data-icon="calendar" data-icon-class="icon-lg"></span></span>
+            <h3>Deadline radar</h3>
+            <p>See what is due, at risk or overdue across every project before it becomes a problem.</p>
+          </article>
+          <article class="card feature-card">
+            <span class="icon-tile" data-tone="success"><span data-icon="users" data-icon-class="icon-lg"></span></span>
+            <h3>Team visibility</h3>
+            <p>Understand who is working on what, balance workloads and onboard new teammates in minutes.</p>
+          </article>
+          <article class="card feature-card">
+            <span class="icon-tile" data-tone="info"><span data-icon="chart" data-icon-class="icon-lg"></span></span>
+            <h3>Productivity analytics</h3>
+            <p>Weekly and monthly insights on throughput, completion rates and cycle time — no spreadsheets needed.</p>
+          </article>
+          <article class="card feature-card">
+            <span class="icon-tile" data-tone="danger"><span data-icon="shield" data-icon-class="icon-lg"></span></span>
+            <h3>Enterprise-grade security</h3>
+            <p>SSO, two-factor authentication, granular permissions and audit logs built in from day one.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product preview -->
+    <section class="section" id="preview" aria-labelledby="preview-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Product preview</span>
+          <h2 class="section-title" id="preview-title">A workspace that feels as fast as you think</h2>
+          <p class="section-sub">Switch between a high-level overview and a focused task board without losing context.</p>
+        </div>
+
+        <div class="preview" data-tabs>
+          <div class="preview-tabs">
+            <div class="segmented" role="tablist" aria-label="Product preview views">
+              <button type="button" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
+              <button type="button" role="tab" id="tab-board" aria-controls="panel-board" aria-selected="false" tabindex="-1">Task board</button>
+            </div>
+          </div>
+
+          <div class="preview-frame">
+            <div class="preview-chrome" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <span class="url">app.nexora.io/dashboard</span>
+            </div>
+            <div class="preview-window">
+              <div class="mock-side" aria-hidden="true">
+                <div class="mock-brand"><img src="assets/logo.svg" alt="">NEXORA</div>
+                <div class="mock-nav">
+                  <span class="active"><span data-icon="dashboard" data-icon-class="icon-sm"></span>Dashboard</span>
+                  <span><span data-icon="folder" data-icon-class="icon-sm"></span>Projects</span>
+                  <span><span data-icon="check-square" data-icon-class="icon-sm"></span>Tasks</span>
+                  <span><span data-icon="users" data-icon-class="icon-sm"></span>Team</span>
+                  <span><span data-icon="chart" data-icon-class="icon-sm"></span>Analytics</span>
+                </div>
+              </div>
+
+              <div class="mock-main" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview">
+                <div class="mock-head">
+                  <div>
+                    <h3>Good morning, Alex</h3>
+                    <p>You have 6 tasks due this week</p>
+                  </div>
+                  <span class="mock-pill">+ New task</span>
+                </div>
+                <div class="mock-stats">
+                  <div class="mock-stat"><span>Projects</span><strong>24</strong><em>+3 this month</em></div>
+                  <div class="mock-stat"><span>Active tasks</span><strong>128</strong><em>+12%</em></div>
+                  <div class="mock-stat"><span>Completed</span><strong>1,042</strong><em>+18%</em></div>
+                  <div class="mock-stat"><span>Team</span><strong>32</strong><em>4 online</em></div>
+                </div>
+                <div class="mock-grid">
+                  <div class="mock-card">
+                    <h4>Productivity</h4>
+                    <svg class="mock-chart" viewBox="0 0 400 150" preserveAspectRatio="none" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="mockFill" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stop-color="#5b8cff" stop-opacity=".35"/>
+                          <stop offset="1" stop-color="#5b8cff" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M0 120 C40 110 60 80 100 86 S160 60 200 64 S260 30 300 40 S360 20 400 14 V150 H0Z" fill="url(#mockFill)"/>
+                      <path d="M0 120 C40 110 60 80 100 86 S160 60 200 64 S260 30 300 40 S360 20 400 14" fill="none" stroke="#5b8cff" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+                      <path d="M0 132 C40 126 70 110 100 112 S160 96 200 100 S260 80 300 84 S360 66 400 60" fill="none" stroke="#a78bfa" stroke-width="2" stroke-dasharray="5 5" vector-effect="non-scaling-stroke"/>
+                    </svg>
+                  </div>
+                  <div class="mock-card">
+                    <h4>Due this week</h4>
+                    <div class="mock-task"><i class="done"></i><span>Publish design tokens</span></div>
+                    <div class="mock-task"><i></i><span>Webhook retry spec</span></div>
+                    <div class="mock-task"><i></i><span>Regression test checkout</span></div>
+                    <div class="mock-task"><i></i><span>Campaign messaging brief</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mock-main" role="tabpanel" id="panel-board" aria-labelledby="tab-board" hidden>
+                <div class="mock-head">
+                  <div>
+                    <h3>Atlas Mobile App</h3>
+                    <p>Sprint 14 · 9 days remaining</p>
+                  </div>
+                  <span class="mock-pill">+ Add task</span>
+                </div>
+                <div class="mock-board">
+                  <div class="mock-col">
+                    <h4>To do <span>3</span></h4>
+                    <div class="mock-ticket"><p>Usability test new navigation</p><div class="row"><span class="badge" data-tone="warning">Medium</span><span class="avatar avatar-xs" style="--hue:12">SR</span></div></div>
+                    <div class="mock-ticket"><p>Offline banner copy</p><div class="row"><span class="badge" data-tone="success">Low</span><span class="avatar avatar-xs" style="--hue:262">AO</span></div></div>
+                  </div>
+                  <div class="mock-col">
+                    <h4>In progress <span>2</span></h4>
+                    <div class="mock-ticket"><p>Offline sync conflict rules</p><div class="row"><span class="badge" data-tone="danger">High</span><span class="avatar avatar-xs" style="--hue:330">PS</span></div></div>
+                    <div class="mock-ticket"><p>Push permission flow</p><div class="row"><span class="badge" data-tone="warning">Medium</span><span class="avatar avatar-xs" style="--hue:150">KT</span></div></div>
+                  </div>
+                  <div class="mock-col">
+                    <h4>Done <span>5</span></h4>
+                    <div class="mock-ticket"><p>New tab bar icons</p><div class="row"><span class="badge" data-tone="success">Low</span><span class="avatar avatar-xs" style="--hue:12">SR</span></div></div>
+                    <div class="mock-ticket"><p>Crash reporting setup</p><div class="row"><span class="badge" data-tone="danger">High</span><span class="avatar avatar-xs" style="--hue:190">LM</span></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">How it works</span>
+          <h2 class="section-title" id="how-title">Up and running in an afternoon</h2>
+          <p class="section-sub">No lengthy onboarding. Import your work, invite your team and start shipping.</p>
+        </div>
+        <ol class="steps">
+          <li class="card step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3>Create your workspace</h3>
+            <p>Set up projects in seconds from templates, or import existing work from spreadsheets and other tools.</p>
+          </li>
+          <li class="card step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3>Plan and assign</h3>
+            <p>Break projects into tasks, set priorities and deadlines, and assign owners so accountability is clear.</p>
+          </li>
+          <li class="card step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3>Track and improve</h3>
+            <p>Follow progress in real time and use analytics to remove bottlenecks and improve every sprint.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Team productivity -->
+    <section class="section" id="productivity" aria-labelledby="productivity-title">
+      <div class="container split">
+        <div>
+          <div class="section-head">
+            <span class="eyebrow">Team productivity</span>
+            <h2 class="section-title" id="productivity-title">Balance workloads before anyone burns out</h2>
+            <p class="section-sub">NEXORA shows how work is distributed across your team so managers can rebalance early and keep delivery predictable.</p>
+          </div>
+          <ul class="check-points">
+            <li><span data-icon="check-circle"></span><span><strong>Workload view</strong> — see active tasks per person at a glance.</span></li>
+            <li><span data-icon="check-circle"></span><span><strong>Focus time</strong> — protect deep work with quiet hours and smart notifications.</span></li>
+            <li><span data-icon="check-circle"></span><span><strong>Weekly digest</strong> — a summary of wins, blockers and upcoming deadlines.</span></li>
+          </ul>
+          <div class="metric-row">
+            <div class="metric"><strong class="gradient-text">38%</strong><span>faster delivery</span></div>
+            <div class="metric"><strong class="gradient-text">12h</strong><span>saved per person / month</span></div>
+            <div class="metric"><strong class="gradient-text">2.4×</strong><span>fewer missed deadlines</span></div>
+          </div>
+        </div>
+
+        <div class="card productivity-card glass">
+          <div class="row between">
+            <div>
+              <h3 class="card-title">Team workload</h3>
+              <p class="card-sub">Tasks completed this sprint</p>
+            </div>
+            <span class="badge badge-dot" data-tone="success">On track</span>
+          </div>
+          <ul class="hbar-list">
+            <li class="hbar"><span class="hbar-label"><span class="avatar avatar-sm" style="--hue:330">PS</span><span class="truncate">Priya Sharma</span></span><span class="hbar-track"><span class="hbar-fill" style="--value:92%"></span></span><span class="hbar-value">46</span></li>
+            <li class="hbar"><span class="hbar-label"><span class="avatar avatar-sm" style="--hue:150">KT</span><span class="truncate">Kenji Tanaka</span></span><span class="hbar-track"><span class="hbar-fill" style="--value:84%"></span></span><span class="hbar-value">42</span></li>
+            <li class="hbar"><span class="hbar-label"><span class="avatar avatar-sm" style="--hue:262">AO</span><span class="truncate">Amara Okafor</span></span><span class="hbar-track"><span class="hbar-fill" style="--value:74%"></span></span><span class="hbar-value">37</span></li>
+            <li class="hbar"><span class="hbar-label"><span class="avatar avatar-sm" style="--hue:215">DR</span><span class="truncate">Daniel Reyes</span></span><span class="hbar-track"><span class="hbar-fill" style="--value:66%"></span></span><span class="hbar-value">33</span></li>
+            <li class="hbar"><span class="hbar-label"><span class="avatar avatar-sm" style="--hue:12">SR</span><span class="truncate">Sofia Rossi</span></span><span class="hbar-track"><span class="hbar-fill" style="--value:52%"></span></span><span class="hbar-value">26</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Customers</span>
+          <h2 class="section-title" id="testimonials-title">Loved by teams that ship</h2>
+        </div>
+        <div class="testimonials">
+          <figure class="card testimonial">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">
+              <span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span>
+            </div>
+            <blockquote>“We replaced three tools and a weekly status meeting with NEXORA. Our release cadence went from monthly to every two weeks.”</blockquote>
+            <figcaption>
+              <span class="avatar" style="--hue:200">MC</span>
+              <span><strong>Maya Chen</strong><span>VP Engineering, Northwind</span></span>
+            </figcaption>
+          </figure>
+          <figure class="card testimonial">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">
+              <span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span>
+            </div>
+            <blockquote>“The deadline radar alone paid for itself. We see risk a week earlier than we used to, and clients notice the difference.”</blockquote>
+            <figcaption>
+              <span class="avatar" style="--hue:20">JO</span>
+              <span><strong>James Okonkwo</strong><span>Head of Delivery, Lumen Studio</span></span>
+            </figcaption>
+          </figure>
+          <figure class="card testimonial">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">
+              <span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span><span data-icon="star" data-icon-class="icon-sm"></span>
+            </div>
+            <blockquote>“Finally a tool the whole company actually enjoys using. Marketing, design and engineering all plan in the same place now.”</blockquote>
+            <figcaption>
+              <span class="avatar" style="--hue:290">LV</span>
+              <span><strong>Lena Vogel</strong><span>COO, Vertex Labs</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Pricing</span>
+          <h2 class="section-title" id="pricing-title">Simple pricing that scales with you</h2>
+          <p class="section-sub">Start free, upgrade when your team grows. Cancel anytime.</p>
+        </div>
+
+        <div class="billing-toggle">
+          <div class="segmented" role="group" aria-label="Billing period">
+            <button type="button" aria-pressed="true" data-billing="monthly">Monthly</button>
+            <button type="button" aria-pressed="false" data-billing="yearly">Yearly</button>
+          </div>
+          <span class="save-tag">Save 20% yearly</span>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="card price-card">
+            <h3 class="price-name">Starter</h3>
+            <p class="price-desc">For small teams getting organized.</p>
+            <p class="price"><strong data-monthly="$0" data-yearly="$0">$0</strong><span>/ user / month</span></p>
+            <a href="dashboard.html" class="btn btn-secondary btn-block">Start for free</a>
+            <ul class="price-features">
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Up to 5 team members</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>10 active projects</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Tasks, deadlines &amp; comments</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>7-day activity history</li>
+            </ul>
+          </article>
+          <article class="card price-card featured">
+            <div class="row between">
+              <h3 class="price-name">Pro</h3>
+              <span class="badge" data-tone="accent">Most popular</span>
+            </div>
+            <p class="price-desc">For growing teams that need visibility.</p>
+            <p class="price"><strong data-monthly="$12" data-yearly="$10">$12</strong><span>/ user / month</span></p>
+            <a href="dashboard.html" class="btn btn-primary btn-block">Start 14-day trial</a>
+            <ul class="price-features">
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Unlimited projects &amp; members</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Productivity analytics</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Workload &amp; deadline radar</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Integrations &amp; automations</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Priority email support</li>
+            </ul>
+          </article>
+          <article class="card price-card">
+            <h3 class="price-name">Business</h3>
+            <p class="price-desc">For organizations with advanced needs.</p>
+            <p class="price"><strong data-monthly="$24" data-yearly="$20">$24</strong><span>/ user / month</span></p>
+            <a href="dashboard.html" class="btn btn-secondary btn-block">Start 14-day trial</a>
+            <ul class="price-features">
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Everything in Pro</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>SSO &amp; SCIM provisioning</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Advanced permissions &amp; audit log</li>
+              <li><span data-icon="check" data-icon-class="icon-sm"></span>Dedicated success manager</li>
+            </ul>
+          </article>
+        </div>
+        <p class="pricing-note">Need more than 250 seats? <a href="#cta">Talk to sales</a></p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" id="cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta-band">
+          <h2 id="cta-title">Ready to give your team its focus back?</h2>
+          <p>Join 12,000+ teams using NEXORA to plan, track and deliver their best work.</p>
+          <form class="cta-form" id="cta-form" novalidate>
+            <div class="field">
+              <label class="sr-only" for="cta-email">Work email</label>
+              <input class="input" id="cta-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required data-label="Work email">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Start free trial</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" aria-label="NEXORA home">
+            <img src="assets/logo.svg" alt="" width="32" height="32">
+            <span>NEXORA</span>
+          </a>
+          <p>The project and task management platform for teams that care about focus, clarity and shipping on time.</p>
+        </div>
+        <nav class="footer-col" aria-label="Product">
+          <h3>Product</h3>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Workspace">
+          <h3>Workspace</h3>
+          <ul>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="tasks.html">Tasks</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="settings.html">Settings</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Company">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#testimonials">Customers</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#cta">Contact sales</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+          <h3>Legal</h3>
+          <ul>
+            <li><button type="button" class="link-btn" data-action="coming-soon" data-label="Our privacy policy">Privacy</button></li>
+            <li><button type="button" class="link-btn" data-action="coming-soon" data-label="Our terms of service">Terms</button></li>
+            <li><button type="button" class="link-btn" data-action="coming-soon" data-label="Our security overview">Security</button></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span data-year>2026</span> NEXORA, Inc. All rights reserved.</p>
+        <div class="socials">
+          <button type="button" class="btn-icon sm" data-action="coming-soon" data-label="The NEXORA community" aria-label="NEXORA community"><span data-icon="message" data-icon-class="icon-sm"></span></button>          <a class="btn-icon sm" href="mailto:hello@nexora.app" aria-label="Email NEXORA"><span data-icon="mail" data-icon-class="icon-sm"></span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

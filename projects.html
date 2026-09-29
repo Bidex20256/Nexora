@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects · NEXORA</title>
+  <meta name="description" content="Manage every project in your NEXORA workspace: status, progress, due dates, priority and team.">
+  <meta name="theme-color" content="#060913">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
+</head>
+<body data-page="projects">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" data-shell="sidebar" aria-label="Sidebar"></aside>
+    <div class="scrim" data-action="close-nav" hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-shell="topbar"></header>
+
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Workspace</p>
+            <h1 class="page-title">Projects</h1>
+            <p class="page-sub" id="project-count" aria-live="polite">Loading projects…</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" data-open-modal="project-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>Add project</button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="field search-field">
+            <label class="sr-only" for="project-search">Search projects</label>
+            <div class="input-icon">
+              <span data-icon="search" data-icon-class="icon-sm"></span>
+              <input class="input" id="project-search" type="search" placeholder="Search projects…" autocomplete="off">
+            </div>
+          </div>
+          <div class="toolbar-end">
+            <label class="sr-only" for="project-priority">Filter by priority</label>
+            <select class="select" id="project-priority">
+              <option value="all">All priorities</option>
+              <option value="high">High priority</option>
+              <option value="medium">Medium priority</option>
+              <option value="low">Low priority</option>
+            </select>
+            <label class="sr-only" for="project-sort">Sort projects</label>
+            <select class="select" id="project-sort">
+              <option value="due">Sort: Due date</option>
+              <option value="progress">Sort: Progress</option>
+              <option value="priority">Sort: Priority</option>
+              <option value="name">Sort: Name</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chips filter-bar" role="group" aria-label="Filter by status" id="project-filters">
+          <button type="button" class="chip" aria-pressed="true" data-filter="all">All <span class="count" data-count="all">0</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-filter="active">Active <span class="count" data-count="active">0</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-filter="planning">Planning <span class="count" data-count="planning">0</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-filter="review">In review <span class="count" data-count="review">0</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-filter="on-hold">On hold <span class="count" data-count="on-hold">0</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-filter="completed">Completed <span class="count" data-count="completed">0</span></button>
+        </div>
+
+        <section class="project-grid" id="project-grid" aria-label="Projects">
+          <div class="skeleton sk-card"></div>
+          <div class="skeleton sk-card"></div>
+          <div class="skeleton sk-card"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="modal" id="project-modal" aria-labelledby="project-modal-title">
+    <form class="modal-form" id="project-form" novalidate>
+      <div class="modal-head">
+        <span class="modal-icon" data-icon="folder" aria-hidden="true"></span>
+        <div>
+          <h2 class="modal-title" id="project-modal-title" data-edit-text="Edit project">Add project</h2>
+          <p class="modal-sub" data-edit-text="Update the details, progress and team for this project.">Set up a new project and choose who is working on it.</p>
+        </div>
+        <button type="button" class="btn-icon sm" data-close-modal aria-label="Close dialog"><span data-icon="x"></span></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field span-2">
+            <label class="label" for="project-name">Project name</label>
+            <input class="input" id="project-name" name="name" type="text" required minlength="3" maxlength="60" placeholder="e.g. Website relaunch" autofocus>
+          </div>
+          <div class="field span-2">
+            <label class="label" for="project-description">Description <span class="optional">(optional)</span></label>
+            <textarea class="textarea" id="project-description" name="description" maxlength="200" placeholder="What is this project about?"></textarea>
+          </div>
+          <div class="field">
+            <label class="label" for="project-status">Status</label>
+            <select class="select" id="project-status" name="status">
+              <option value="planning">Planning</option>
+              <option value="active" selected>Active</option>
+              <option value="review">In review</option>
+              <option value="on-hold">On hold</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="label" for="project-priority-input">Priority</label>
+            <select class="select" id="project-priority-input" name="priority">
+              <option value="high">High</option>
+              <option value="medium" selected>Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="field span-2" data-edit-half>
+            <label class="label" for="project-due">Due date</label>
+            <input class="input" id="project-due" name="due" type="date" required data-future-date>
+          </div>
+          <div class="field" data-edit-only hidden>
+            <label class="label" for="project-progress-input">Progress (%)</label>
+            <input class="input" id="project-progress-input" name="progress" type="number" min="0" max="100" step="1" required inputmode="numeric">
+          </div>
+          <fieldset class="field span-2" id="project-members-field">
+            <legend class="label">Team members</legend>
+            <div class="check-list" id="project-members" data-min-checked="1" data-label="Team members"></div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary" data-edit-text="Save changes">Create project</button>
+      </div>
+    </form>
+  </dialog>
+
+  <noscript><div class="noscript">NEXORA needs JavaScript enabled to load your workspace.</div></noscript>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

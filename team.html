@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team · NEXORA</title>
+  <meta name="description" content="See who is on your NEXORA team, their roles, status, active projects and completed tasks.">
+  <meta name="theme-color" content="#060913">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="css/styles.css">
+  <script>try{var a=JSON.parse(localStorage.getItem('nexora:appearance'))||{};for(var k in a)document.documentElement.setAttribute('data-'+k,a[k])}catch(e){}</script>
+</head>
+<body data-page="team">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" data-shell="sidebar" aria-label="Sidebar"></aside>
+    <div class="scrim" data-action="close-nav" hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-shell="topbar"></header>
+
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">Workspace</p>
+            <h1 class="page-title">Team</h1>
+            <p class="page-sub">Manage members, roles and workload across your organization.</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" data-open-modal="member-modal"><span data-icon="plus" data-icon-class="icon-sm"></span>Invite member</button>
+          </div>
+        </div>
+
+        <section class="task-summary" aria-label="Team summary">
+          <div class="card mini-stat"><span class="icon-tile" data-tone="accent"><span data-icon="users"></span></span><div><strong data-team-stat="total">0</strong><span>Members</span></div></div>
+          <div class="card mini-stat"><span class="icon-tile" data-tone="success"><span data-icon="activity"></span></span><div><strong data-team-stat="online">0</strong><span>Online now</span></div></div>
+          <div class="card mini-stat"><span class="icon-tile" data-tone="violet"><span data-icon="check-circle"></span></span><div><strong data-team-stat="avg">0</strong><span>Avg. tasks completed</span></div></div>
+          <div class="card mini-stat"><span class="icon-tile" data-tone="info"><span data-icon="layers"></span></span><div><strong data-team-stat="departments">0</strong><span>Departments</span></div></div>
+        </section>
+
+        <div class="toolbar">
+          <div class="field search-field">
+            <label class="sr-only" for="member-search">Search team</label>
+            <div class="input-icon">
+              <span data-icon="search" data-icon-class="icon-sm"></span>
+              <input class="input" id="member-search" type="search" placeholder="Search by name, role or email…" autocomplete="off">
+            </div>
+          </div>
+          <div class="toolbar-end">
+            <label class="sr-only" for="member-department">Filter by department</label>
+            <select class="select" id="member-department">
+              <option value="all">All departments</option>
+            </select>
+            <label class="sr-only" for="member-status">Filter by status</label>
+            <select class="select" id="member-status">
+              <option value="all">Any status</option>
+              <option value="online">Online</option>
+              <option value="away">Away</option>
+              <option value="offline">Offline</option>
+              <option value="invited">Invited</option>
+            </select>
+            <div class="segmented" role="group" aria-label="Layout" id="member-view">
+              <button type="button" aria-pressed="true" data-view="cards"><span data-icon="grid" data-icon-class="icon-sm"></span>Cards</button>
+              <button type="button" aria-pressed="false" data-view="table"><span data-icon="list" data-icon-class="icon-sm"></span>Table</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-sm muted filter-bar" id="member-count" aria-live="polite"></p>
+        <section class="member-grid" id="member-grid" aria-label="Team members">
+          <div class="skeleton sk-card tall"></div>
+          <div class="skeleton sk-card tall"></div>
+          <div class="skeleton sk-card tall"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="modal" id="member-modal" aria-labelledby="member-modal-title">
+    <form class="modal-form" id="member-form" novalidate>
+      <div class="modal-head">
+        <span class="modal-icon" data-icon="mail" aria-hidden="true"></span>
+        <div>
+          <h2 class="modal-title" id="member-modal-title" data-edit-text="Edit team member">Invite a team member</h2>
+          <p class="modal-sub" data-edit-text="Update this person's name, contact details and role.">They will receive an email invitation to join the workspace.</p>
+        </div>
+        <button type="button" class="btn-icon sm" data-close-modal aria-label="Close dialog"><span data-icon="x"></span></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field span-2">
+            <label class="label" for="member-name">Full name</label>
+            <input class="input" id="member-name" name="name" type="text" required minlength="2" maxlength="60" placeholder="e.g. Jordan Lee" autocomplete="off" autofocus>
+          </div>
+          <div class="field span-2">
+            <label class="label" for="member-email">Work email</label>
+            <input class="input" id="member-email" name="email" type="email" required placeholder="jordan@company.com" autocomplete="off" data-unique-email>
+          </div>
+          <div class="field">
+            <label class="label" for="member-role">Role</label>
+            <input class="input" id="member-role" name="role" type="text" required minlength="2" maxlength="50" placeholder="e.g. Frontend Engineer">
+          </div>
+          <div class="field">
+            <label class="label" for="member-department-input">Department</label>
+            <select class="select" id="member-department-input" name="department">
+              <option>Engineering</option>
+              <option>Product</option>
+              <option>Design</option>
+              <option>Marketing</option>
+              <option>Operations</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary" data-edit-text="Save changes">Send invite</button>
+      </div>
+    </form>
+  </dialog>
+
+  <noscript><div class="noscript">NEXORA needs JavaScript enabled to load your workspace.</div></noscript>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
