@@ -41,7 +41,7 @@
         </ul>
       </nav>
       <div class="header-actions">
-        <a href="dashboard.html" class="btn btn-ghost">Sign in</a>
+        <a href="#sign-in" class="btn btn-ghost" data-open-modal="signin-modal" aria-haspopup="dialog">Sign in</a>
         <a href="dashboard.html" class="btn btn-primary">Get started</a>
         <button class="btn-icon menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-action="toggle-site-menu">
           <span data-icon="menu"></span>
@@ -57,7 +57,7 @@
           <li><a href="#testimonials">Customers</a></li>
           <li><a href="#pricing">Pricing</a></li>
         </ul>
-        <a href="dashboard.html" class="btn btn-secondary btn-lg">Sign in</a>
+        <a href="#sign-in" class="btn btn-secondary btn-lg" data-open-modal="signin-modal" aria-haspopup="dialog">Sign in</a>
         <a href="dashboard.html" class="btn btn-primary btn-lg">Get started free</a>
       </div>
     </nav>
@@ -500,6 +500,44 @@
     </div>
   </footer>
 
+  <dialog class="modal modal-sm" id="signin-modal" aria-labelledby="signin-title" aria-describedby="signin-sub">
+    <form class="modal-form" id="signin-form" novalidate>
+      <div class="modal-head">
+        <span class="modal-icon" data-icon="shield" aria-hidden="true"></span>
+        <div>
+          <h2 class="modal-title" id="signin-title">Sign in</h2>
+          <p class="modal-sub" id="signin-sub">Use your NEXORA account email and password.</p>
+        </div>
+        <button type="button" class="btn-icon sm" data-close-modal aria-label="Close dialog"><span data-icon="x"></span></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field span-2">
+            <label class="label" for="signin-email">Email</label>
+            <input class="input" id="signin-email" name="email" type="email" required autocomplete="username" inputmode="email" placeholder="you@company.com" aria-describedby="signin-email-error" autofocus>
+            <p class="field-error" id="signin-email-error"></p>
+          </div>
+          <div class="field span-2">
+            <label class="label" for="signin-password">Password</label>
+            <input class="input" id="signin-password" name="password" type="password" required autocomplete="current-password" aria-describedby="signin-password-error">
+            <p class="field-error" id="signin-password-error"></p>
+          </div>
+          <div class="span-2">
+            <p class="field-error" id="signin-error" role="alert"></p>
+            <p class="hint" id="signin-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="js/supabase-client.js" defer></script>
+  <script src="js/auth.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>
